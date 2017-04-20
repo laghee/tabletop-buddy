@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ListAdapter;
 import android.view.View;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,7 +21,7 @@ import android.widget.SimpleCursorAdapter;
 // Correctly queries games added to MyGameDatabase and populates view
 // of personal library.
 // Users are able to add and delete games from their local library.
-public class MyLibraryActivity extends Activity {
+public class MyLibraryActivity extends ListActivity {
 
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -53,25 +54,25 @@ public class MyLibraryActivity extends Activity {
             return cursor;
         }
 
-/*        @Override
+        @Override
         protected void onPostExecute(Cursor cursor) {
         super.onPostExecute(cursor);
 
         ListView listGames = getListView();
         if(cursor !=null) {
-            CursorAdapter gameListAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
+            CursorAdapter gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
                     android.R.layout.simple_list_item_1,
                     cursor,
                     new String[]{"NAME"},
-                   new int[]android.R.id.text1},
-            0);
-            listGames.setAdapter(listGames);
+                    new int[]{android.R.id.text1},
+                    0);
+            listGames.setAdapter(gameCursorAdapter);
         } else {
             Toast toast = Toast.makeText(MyLibraryActivity.this, "Database error", Toast.LENGTH_SHORT);
+            toast.show();
         }
-    }*/
+    }
 }
-
 
     @Override
     public void onDestroy() {
