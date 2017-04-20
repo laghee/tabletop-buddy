@@ -5,39 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     tools:context="edu.mills.tabletopbuddy.MainActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp"
-        android:padding="50dp"
-        android:text="@string/welcome"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSearch"
-        android:textSize="50sp"
-        android:background="@drawable/rounded_button"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:text ="@string/search"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSearch"
-        android:textSize="50sp"
-        android:background="@drawable/rounded_button"
-        android:padding="15dp"
-        android:layout_margin="10dp"
-        android:text ="@string/my_library"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSearch"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_button"
+            android:drawableLeft="@drawable/mag_glass_small"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:text ="@string/search"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSearch"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_button"
+            android:drawableLeft="@drawable/games_pile_small"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:text ="@string/my_library"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onRandomGenerator"
-        android:textSize="50sp"
+        android:textSize="20sp"
         android:background="@drawable/rounded_button"
+        android:drawableLeft="@drawable/dice2_small"
+        android:id="@+id/ButtonRandom"
         android:padding="15dp"
         android:layout_margin="10dp"
         android:text ="@string/random"/>
+
 </LinearLayout>
