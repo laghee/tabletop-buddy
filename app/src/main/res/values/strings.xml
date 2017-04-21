@@ -4,11 +4,10 @@
     <string name="search">Search for a game</string>
     <string name="my_library">View my library</string>
     <string name="random">Random game generator</string>
-    <string name="random_game_activity"> "Hi! This is RandomGameActivity"</string>
+    <string name="random_game_activity"> "Random Game Generator"</string>
     <string name="my_library_activity"> "Hi! This is MyLibraryActivity"</string>
     <string name="favorite">Favorite</string>
-    <string name="spinner_theme_title">Theme Spinner</string>
-    <string name="spinner_type_title">Type Spinner</string>
-    <string name="spinner_max_player_title">max players</string>
-    <string name="spinner_min_player_title">min players</string>
+    <string name="spinner_player_title">Players</string>
+    <string name="spinner_time_title">Time</string>
+    <string name="spinner_age_title">Age</string>
 </resources>
