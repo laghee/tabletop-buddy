@@ -23,8 +23,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        makeDummyDatabase();
+// Kate
+//         setContentView(R.layout.activity_main);
+//         makeDummyDatabase();
+        setContentView(R.layout.activity_random_game);
     }
 
     public void onSearch(View view){
@@ -37,9 +39,9 @@ public class MainActivity extends Activity {
 //        startActivity(intent);
 //    }
 
-    public void onRandomGenerator(View view){
-        Intent intent = new Intent(this, RandomGameActivity.class);
-        startActivity(intent);
+    public void onRandomGenerator(View v){
+        Intent randintent = new Intent(this, RandomGameActivity.class);
+        startActivity(randintent);
     }
 
     private void makeDummyDatabase() {
