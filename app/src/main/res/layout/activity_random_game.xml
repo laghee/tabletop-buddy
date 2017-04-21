@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<!-- Kcutler -->
+<!-- <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +8,16 @@
     android:layout_height="match_parent"
     tools:context="edu.mills.tabletopbuddy.RandomGameActivity"
     android:orientation="vertical"
-    android:text='@string/random_game_activity'>
+    android:text='@string/random_game_activity'> -->
+
+<!-- Arianne -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <TextView
         android:text="@string/random_game_activity"
@@ -18,8 +28,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="22dp" />
 
-
-    <ListView
+<!-- KCutler -->
+<!--     <ListView
         android:id="@+id/categorylist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -80,4 +90,94 @@
         android:text="Submit"
         />
 
+    </LinearLayout> -->
+
+  
+<!--  Arianne -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:background="@drawable/random_machine"
+    android:gravity="center"
+    tools:context="edu.mills.tabletopbuddy.RandomGameActivity">
+
+    <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+       <TextView
+           android:layout_width="wrap_content"
+           android:text="criterion 1:"
+           android:layout_height="wrap_content" />
+       <Spinner
+            android:id="@+id/themespinner"
+            android:layout_width="wrap_content"
+            android:spinnerMode="dialog"
+            android:layout_height="wrap_content"
+            android:entries="@array/dud_array"
+            android:prompt="@string/spinner_theme_title"/>
     </LinearLayout>
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="30dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="criterion 2:"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/typespinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/dud_array"
+            android:prompt="@string/spinner_type_title"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="30dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="criterion 3:"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/minplayerspinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/dud_array"
+            android:prompt="@string/spinner_min_player_title"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="30dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="criterion 4:"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/maxplayerspinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/dud_array"
+            android:prompt="@string/spinner_max_player_title"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/get_random_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:padding="15dp"
+        android:text="Get Random Game"/>
+</LinearLayout>
+</LinearLayout>
