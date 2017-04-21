@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.mills.tabletopbuddy">
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/dice"
@@ -17,6 +18,8 @@
         </activity>
         <activity android:name=".GameDetailActivity" />
         <activity android:name=".RandomGameActivity" />
-        <activity android:name=".MyLibraryActivity"></activity>
+        <activity android:name=".MyLibraryActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
+
 </manifest>

@@ -16,10 +16,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/random_machine_horizontal"
-        android:gravity="center"
-        >
+        android:gravity="center">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
@@ -38,7 +37,7 @@
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
@@ -56,7 +55,7 @@
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
@@ -74,7 +73,7 @@
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
