@@ -25,9 +25,9 @@ public class MainActivity extends Activity {
 //        startActivity(intent);
 //    }
 
-    public void onRandomGenerator(View view){
-        Intent intent = new Intent(this, RandomGameActivity.class);
-        startActivity(intent);
+    public void onRandomGenerator(View v){
+        Intent randintent = new Intent(this, RandomGameActivity.class);
+        startActivity(randintent);
     }
 
 }
