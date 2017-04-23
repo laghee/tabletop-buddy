@@ -23,7 +23,7 @@
         android:id="@+id/categorylist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        />
+        android:entries="@array/categories" />
 
     <TextView
         android:text="@string/spinner_time_title"
@@ -32,7 +32,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:entries="@array/times"/>
 
     <Spinner
         android:id="@+id/mintimespinner"
@@ -48,7 +49,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:entries="@array/players"/>
 
     <Spinner
         android:id="@+id/minplayerspinner"
@@ -64,7 +66,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:entries="@array/ages"/>
 
     <Spinner
         android:id="@+id/minagespinner"

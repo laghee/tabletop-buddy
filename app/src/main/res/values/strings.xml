@@ -10,4 +10,49 @@
     <string name="spinner_player_title">Players</string>
     <string name="spinner_time_title">Time</string>
     <string name="spinner_age_title">Age</string>
+    <string-array name="players">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <string-array name="ages">
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
+    <string-array name="times">
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="categories">
+        <item>Adventure</item>
+        <item>Dice</item>
+        <item>Mafia</item>
+        <item>Medieval</item>
+        <item>Pirates</item>
+        <item>Science</item>
+        <item>War</item>
+        <item>Economic</item>
+        <item>Farming</item>
+        <item>Maze</item>
+        <item>Zombies</item>
+        <item>Travel</item>
+    </string-array>
 </resources>
