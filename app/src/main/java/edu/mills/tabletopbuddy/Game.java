@@ -3,7 +3,7 @@ package edu.mills.tabletopbuddy;
 
 import android.database.sqlite.SQLiteDatabase;
 
-//Game class with fields and getters and setters.
+//Game class with fields, getters and setters.
 public class Game {
 
     private String image, name, description, theme;
@@ -158,6 +158,8 @@ public Game(String image, String name, String description, String theme,
     public String toString() {
         return super.toString();
     }
+
+    //need to implement comparators
 
     /*  SQLiteDatabase db, String image, String name, String description, String theme, Integer pubdate,
     Double myrating, Double bggrating, Integer minplayers, Integer maxplayers,
