@@ -18,74 +18,74 @@
         android:background="@drawable/random_machine_horizontal"
         android:gravity="center">
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="criterion 1:"
+                android:text="Categories:"
                 android:layout_height="wrap_content" />
             <Spinner
-                android:id="@+id/themespinner"
+                android:id="@+id/categoryspinner"
                 android:layout_width="wrap_content"
                 android:spinnerMode="dialog"
                 android:layout_height="wrap_content"
-                android:entries="@array/dud_array"
-                android:prompt="@string/spinner_theme_title"/>
+                android:entries="@array/categories"
+                android:prompt="@string/spinner_category"/>
         </LinearLayout>
         <Space
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="criterion 2:"
+                android:text="Min Age:"
                 android:layout_height="wrap_content" />
             <Spinner
-                android:id="@+id/typespinner"
+                android:id="@+id/agespinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/dud_array"
-                android:prompt="@string/spinner_type_title"/>
+                android:entries="@array/ages"
+                android:prompt="@string/spinner_ages"/>
         </LinearLayout>
         <Space
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="criterion 3:"
+                android:text="Min Players:"
                 android:layout_height="wrap_content" />
             <Spinner
-                android:id="@+id/minplayerspinner"
+                android:id="@+id/playerspinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/dud_array"
-                android:prompt="@string/spinner_min_player_title"/>
+                android:entries="@array/players"
+                android:prompt="@string/spinner_players"/>
         </LinearLayout>
         <Space
             android:layout_width="1dp"
             android:layout_height="30dp"/>
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="criterion 4:"
+                android:text="Min Time:"
                 android:layout_height="wrap_content" />
             <Spinner
-                android:id="@+id/maxplayerspinner"
+                android:id="@+id/timespinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/dud_array"
-                android:prompt="@string/spinner_max_player_title"/>
+                android:entries="@array/times"
+                android:prompt="@string/spinner_time"/>
         </LinearLayout>
         <Button
             android:id="@+id/get_random_button"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
             android:padding="15dp"
-            android:text="Get Random Game"
+            android:text="Submit"
             />
     </LinearLayout>
 </LinearLayout>
