@@ -29,7 +29,7 @@ public class GameDetailActivity extends Activity {
             SQLiteOpenHelper libraryDatabaseHelper = new SQLiteMyLibraryDatabaseHelper(this);
             SQLiteDatabase db = libraryDatabaseHelper.getReadableDatabase();
             Cursor cursor = db.query ("LIBRARY",
-                    new String[] {"NAME", "THEME", "RATING", "MIN_PLAYERS", "MAX_PLAYERS", "MIN_TIME",
+                    new String[] {"NAME", "MIN_PLAYERS", "MAX_PLAYERS", "MIN_TIME",
                             "MAX_TIME", "MIN_AGE"},
                     "_id = ?",
                     new String[] {Integer.toString(gameNo)},
@@ -40,13 +40,15 @@ public class GameDetailActivity extends Activity {
 
                 //Get the game details from the cursor
                 String nameText = cursor.getString(0);
-                String themeText = cursor.getString(1);
-                double ratingNo = cursor.getDouble(2);
-                int minPlayerNo = cursor.getInt(3);
-                int maxPlayerNo = cursor.getInt(4);
-                int minTimeNo = cursor.getInt(5);
-                int maxTimeNo = cursor.getInt(6);
-                int minAgeNo = cursor.getInt(7);
+//                String themeText = cursor.getString(1);
+//                double bggRatingNo = cursor.getDouble(1);
+                int minPlayerNo = cursor.getInt(1);
+                int maxPlayerNo = cursor.getInt(2);
+                int minTimeNo = cursor.getInt(3);
+                int maxTimeNo = cursor.getInt(4);
+                int minAgeNo = cursor.getInt(5);
+
+
 //                int photoId = cursor.getInt(8);
 //                boolean isFavorite = (cursor.getInt(9) == 1);
 
@@ -54,34 +56,28 @@ public class GameDetailActivity extends Activity {
                 TextView name = (TextView)findViewById(R.id.game_name);
                 name.setText(nameText);
 
-
                 //Populate the game name
-                TextView theme = (TextView)findViewById(R.id.theme);
-                theme.setText(themeText);
+//                TextView theme = (TextView)findViewById(R.id.theme);
+//                theme.setText(themeText);
 
                 //Populate the game rating
-                TextView rating = (TextView)findViewById(R.id.rating);
-                rating.setText((int) ratingNo); //need to figure out what View to use to place rating
+//                TextView rating = (TextView)findViewById(R.id.rating);
+//                rating.setText((int) bggRatingNo);
 
-                //Populate the game min players
-                TextView minPlayer = (TextView)findViewById(R.id.players);
-                minPlayer.setText((int) minPlayerNo); //need to figure out what View to use to place rating
+                //Populate the game min and max players
+                TextView players = (TextView)findViewById(R.id.players);
+                String playerNum = minPlayerNo + " - " + maxPlayerNo + " players";
+                players.setText(playerNum);
 
-                //Populate the game max players
-                TextView maxPlayer = (TextView)findViewById(R.id.players);
-                maxPlayer.setText((int) maxPlayerNo); //need to figure out what View to use to place rating
-
-                //Populate the game min time
-                TextView minTime = (TextView)findViewById(R.id.time);
-                minTime.setText((int) minTimeNo); //need to figure out what View to use to place rating
-
-                //Populate the game max time
-                TextView maxTime = (TextView)findViewById(R.id.time);
-                maxTime.setText((int) maxTimeNo); //need to figure out what View to use to place rating
+                //Populate the game min and max time
+                TextView time = (TextView)findViewById(R.id.time);
+                String timeNum = minTimeNo + " - " + maxTimeNo + " mins";
+                time.setText(timeNum);
 
                 //Populate the game min age
                 TextView minAge = (TextView)findViewById(R.id.ages);
-                minAge.setText((int) minAgeNo); //need to figure out what View to use to place rating
+                String ageNum =  "ages: " + minAgeNo + "+";
+                minAge.setText(ageNum);
 
 //                //Populate the drink image
 //                ImageView photo = (ImageView)findViewById(R.id.photo);

@@ -1,50 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context="edu.mills.tabletopbuddy.GameDetailActivity">
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <ImageView android:id="@+id/photo"
+            android:src="@drawable/fairy"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_rowSpan="2"/>
+        <LinearLayout
+            android:layout_column="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_row="0">
+            <TextView android:id="@+id/game_name"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+                <!--android:text="Evil Fairy"-->
 
-    <ImageView android:id="@+id/photo"
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_column="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1">
+            <TextView android:id="@+id/rating"
+                android:background="@drawable/star_text"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+                <!--android:text="5.5"-->
+
+            <CheckBox android:id="@+id/favorite"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/favorite"
+                android:onClick="onFavoriteClicked"/>
+        </LinearLayout>
+    </GridLayout>
+    <TextView android:id="@+id/theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView android:id="@+id/game_name"
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView android:id="@+id/ages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_text"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="15sp" />
+            <!--android:text="ages 4-6"-->
+
+        <TextView android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_text"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="15sp" />
+            <!--android:text="45-60 min"-->
+
+        <TextView android:id="@+id/players"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_text"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="15sp" />
+            <!--android:text="2-4 players"-->
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/description_scroll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp" />
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <TextView
+            android:id="@+id/description"
+            android:text="@string/lorem_ipsum"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="30sp" />
+    </ScrollView>
 
-    <TextView android:id="@+id/theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp" />
 
-    <TextView android:id="@+id/rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp" />
-
-    <TextView android:id="@+id/ages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp" />
-
-    <TextView android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp" />
-
-    <TextView android:id="@+id/players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="50sp" />
-
-    <CheckBox android:id="@+id/favorite"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/favorite"
-        android:onClick="onFavoriteClicked"/>
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
