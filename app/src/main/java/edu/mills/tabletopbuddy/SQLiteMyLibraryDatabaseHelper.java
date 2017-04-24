@@ -17,16 +17,33 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        updateMyDatabase(db, 0, DB_VERSION);
+//        updateMyDatabase(db, 0, DB_VERSION);
+        db.execSQL("DROP TABLE IF EXISTS LIBRARY");
+        db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "IMAGE TEXT NOT NULL, "
+                + "NAME TEXT NOT NULL, "
+                + "DESCRIPTION TEXT NOT NULL,"
+                + "THEME TEXT NOT NULL, "
+                + "YEAR_PUBLISHED INTEGER NOT NULL, "
+                + "MY_RATING DOUBLE NOT NULL, "
+                + "BGG_RATING DOUBLE NOT NULL, "
+                + "BGG_ID INTEGER NOT NULL, "
+                + "MIN_PLAYERS INTEGER NOT NULL, "
+                + "MAX_PLAYERS INTEGER NOT NULL, "
+                + "MIN_TIME INTEGER NOT NULL, "
+                + "MAX_TIME INTEGER NOT NULL, "
+                + "MIN_AGE INTEGER NOT NULL, "
+                + "FAVORITE INTEGER NOT NULL);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        updateMyDatabase(db, oldVersion, newVersion);
+        updateMyDatabase(db, 0, DB_VERSION);
     }
 
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
+            db.execSQL("DROP TABLE IF EXISTS LIBRARY");
             db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "IMAGE TEXT NOT NULL, "
                     + "NAME TEXT NOT NULL, "
@@ -35,6 +52,7 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
                     + "YEAR_PUBLISHED INTEGER NOT NULL, "
                     + "MY_RATING DOUBLE NOT NULL, "
                     + "BGG_RATING DOUBLE NOT NULL, "
+                    + "BGG_ID INTEGER NOT NULL, "
                     + "MIN_PLAYERS INTEGER NOT NULL, "
                     + "MAX_PLAYERS INTEGER NOT NULL, "
                     + "MIN_TIME INTEGER NOT NULL, "
@@ -46,7 +64,7 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertGame(SQLiteDatabase db, String image, String name, String description, String theme, Integer pubdate,
-                                   Double myrating, Double bggrating, Integer minplayers, Integer maxplayers,
+                                   Double myrating, Double bggrating, Integer bggid, Integer minplayers, Integer maxplayers,
                                    Integer mintime, Integer maxtime, Integer age, Integer FAVE_INIT) {
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", image);
@@ -56,6 +74,7 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
         gameValues.put("YEAR_PUBLISHED", pubdate);
         gameValues.put("MY_RATING", myrating);
         gameValues.put("BGG_RATING", bggrating);
+        gameValues.put("BGG_ID", bggid);
         gameValues.put("MIN_PLAYERS", minplayers);
         gameValues.put("MAX_PLAYERS", maxplayers);
         gameValues.put("MIN_TIME", mintime);

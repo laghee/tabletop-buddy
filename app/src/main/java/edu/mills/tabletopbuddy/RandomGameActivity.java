@@ -7,14 +7,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class RandomGameActivity extends Activity implements AdapterView.OnItemSelectedListener {
-    //eventually the two arrays could be grabbed from BGG API
-    String[] themes = {};
-    String[] types = {};
-    //what should be the max players?
-    String[] players = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    String[] minAges = {"7", "8", "9", "10", "11", "12", "13"};
+    String[] minTimes = {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4"};
+    String[] minPlayers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+    String selectedMinAge;
+    String selectedMinTime;
+    String selectedMinPlayer;
+    ArrayList<String> selectedCategories = new ArrayList<String>();
 
     //References
+    //http://stackoverflow.com/questions/12594207/using-multiple-spinners-in-the-same-layout
     //http://stackoverflow.com/questions/13909109/two-spinner-in-one-activity
     //https://www.tutorialspoint.com/android/android_spinner_control.htm
     //http://stackoverflow.com/questions/363681/how-to-generate-random-integers-within-a-specific-range-in-java
@@ -27,65 +32,40 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
 
-        // Theme Spinner
-        Spinner themeSpinner = (Spinner) findViewById(R.id.themespinner);
-        ArrayAdapter<String> themeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, themes);
-        //there was an error with 'this' so it suggested to cast this - not sure if this
-        //is the best way to handle
-        themeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-        themeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        themeSpinner.setAdapter(themeAdapter);
-
-        // Game Type Spinner
-        Spinner typeSpinner = (Spinner) findViewById(R.id.typespinner);
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeSpinner.setAdapter(typeAdapter);
-        typeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-
         //Min Player Spinner
         Spinner minPlayerSpinner = (Spinner) findViewById(R.id.minplayerspinner);
-        //change to int
-        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, players);
+        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minPlayers);
         minPlayerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        minPlayerSpinner.setAdapter(typeAdapter);
+        minPlayerSpinner.setAdapter(minPlayerAdapter);
         minPlayerSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
-        //Max Player Spinner
-        Spinner maxPlayerSpinner = (Spinner) findViewById(R.id.maxplayerspinner);
-        //change to int
-        ArrayAdapter<String> maxPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, players);
-        maxPlayerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        maxPlayerSpinner.setAdapter(typeAdapter);
-        maxPlayerSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        //Min Age Spinner
+        Spinner minAgeSpinner = (Spinner) findViewById(R.id.minagespinner);
+        ArrayAdapter<String> minAgeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minAges);
+        minAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        minAgeSpinner.setAdapter(minAgeAdapter);
+        minAgeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+
+        //Min Time Spinner
+        Spinner minTimeSpinner = (Spinner) findViewById(R.id.mintimespinner);
+        ArrayAdapter<String> minTimeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minTimes);
+        minTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        minTimeSpinner.setAdapter(minTimeAdapter);
+        minTimeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Spinner themeSpinner = (Spinner) parent;
-        Spinner typeSpinner = (Spinner) parent;
         Spinner minPlayerSpinner = (Spinner) parent;
-        Spinner maxPlayerSpinner = (Spinner) parent;
+        Spinner minAgeSpinner = (Spinner) parent;
+        Spinner minTimeSpinner = (Spinner) parent;
 
-        if(themeSpinner.getId() == R.id.themespinner)
-        {
-            //a theme was chosen - save theme
-            String theme = parent.getItemAtPosition(position).toString();
-        }
-        if(typeSpinner.getId() == R.id.typespinner)
-        {
-            //a theme was chosen - save theme
-            String type = parent.getItemAtPosition(position).toString();
-        }
+        if(minTimeSpinner.getId() == R.id.mintimespinner) {
+            selectedMinTime = parent.getItemAtPosition(position).toString(); }
         if (minPlayerSpinner.getId() == R.id.minplayerspinner) {
-            //max player was chosen - save theme
-            String minPlayers = parent.getItemAtPosition(position).toString();
-        }
-        if (maxPlayerSpinner.getId() == R.id.maxplayerspinner) {
-            //max player was chosen - save theme
-            String maxPlayers = parent.getItemAtPosition(position).toString();
-        }
-
+            selectedMinPlayer = parent.getItemAtPosition(position).toString(); }
+        if (minAgeSpinner.getId() == R.id.minagespinner) {
+            selectedMinAge = parent.getItemAtPosition(position).toString(); }
     }
 
     @Override
