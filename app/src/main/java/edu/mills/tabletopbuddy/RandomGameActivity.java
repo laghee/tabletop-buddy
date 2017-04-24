@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +25,8 @@ public class RandomGameActivity extends Activity {
     SQLiteDatabase db;
     Cursor cursor;
     ArrayList<String> matchedGames = new ArrayList<String>();
-
+    private static String resultToast = "";
+    Integer gamenumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,24 +35,33 @@ public class RandomGameActivity extends Activity {
 
         //Category Spinner
         Spinner categorySpinner = (Spinner) findViewById(R.id.categoryspinner);
-        category = categorySpinner.getSelectedItem().toString();
-
+        category = String.valueOf(categorySpinner.getSelectedItem());
         //Min Player Spinner
         Spinner minPlayerSpinner = (Spinner) findViewById(R.id.playerspinner);
-        selectedMinPlayer = minPlayerSpinner.getSelectedItem().toString();
+        selectedMinPlayer = String.valueOf(minPlayerSpinner.getSelectedItem());
 
         //Min Age Spinner
         Spinner minAgeSpinner = (Spinner) findViewById(R.id.agespinner);
-        selectedMinAge = minAgeSpinner.getSelectedItem().toString();
+        selectedMinAge = String.valueOf(minAgeSpinner.getSelectedItem());
+        //String beerType = String.valueOf(color.getSelectedItem());
 
         //Min Time Spinner
         Spinner minTimeSpinner = (Spinner) findViewById(R.id.timespinner);
-        selectedMinTime = minTimeSpinner.getSelectedItem().toString();
+        selectedMinTime = String.valueOf(minTimeSpinner.getSelectedItem());
 
+
+    }
+
+
+    public void onSubmit(View view){
+//        resultToast += category + selectedMinPlayer + selectedMinTime + selectedMinAge;
+//        Toast toast = Toast.makeText(this, resultToast, Toast.LENGTH_LONG);
+//        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
+//        toast.show();
         new RetrieveGamesTask().execute();
     }
 
-    //Inner class to get miles
+    //Inner class to get games
     private class RetrieveGamesTask extends AsyncTask<Void, Void, Cursor> {
         @Override
         protected Cursor doInBackground(Void... values) {
@@ -58,8 +69,8 @@ public class RandomGameActivity extends Activity {
                     new SQLiteMyLibraryDatabaseHelper(RandomGameActivity.this);
             try {
                 db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
-                cursor = db.query("LIBRARY", new String[]{""},
-                        null, null, "", null, "", "");
+                cursor = db.query("LIBRARY", new String[]{"_id"},
+                        null, null, null, null, null, null);
                 return cursor;
             } catch (SQLiteException e) {
                 return null;
@@ -68,13 +79,17 @@ public class RandomGameActivity extends Activity {
 
         @Override
         protected void onPostExecute(Cursor cursor) {
-            if (cursor.moveToFirst()) {
-                //record values from new table }
-                Log.d("RandomGameActivity", "Retreived games: ");
+            int max = cursor.getCount()-1;
+            //int position = (0 + max)/2 ;
+            cursor.moveToPosition(max);
+            gamenumber = cursor.getInt(0);
+            Toast toast = Toast.makeText(RandomGameActivity.this, String.valueOf(gamenumber), Toast.LENGTH_SHORT);
+            toast.show();
                 db.close();
             }
+
         }
-    }
+
 
 
     //Generates a random number to query the database

@@ -25,8 +25,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 // Kate
 //         setContentView(R.layout.activity_main);
-//         makeDummyDatabase();
-        setContentView(R.layout.activity_random_game);
+         makeDummyDatabase();
+        setContentView(R.layout.activity_main);
     }
 
     public void onSearch(View view){
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 
     private void makeDummyDatabase() {
 
-        String mCSVfile = "mylibrary_collectionRRRG.csv";
+        String mCSVfile = "mylibrary_collection.csv";
         AssetManager manager = this.getApplicationContext().getAssets();
         SQLiteOpenHelper myLibraryDatabaseHelper = new SQLiteMyLibraryDatabaseHelper(this);
         SQLiteDatabase db = myLibraryDatabaseHelper.getWritableDatabase();
@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 
         String line = "";
         db.beginTransaction();
+        int count = 0;
         try {
             while ((line = buffer.readLine()) != null) {
                 String[] colums = line.split(",");
@@ -68,6 +69,7 @@ public class MainActivity extends Activity {
                     Log.d("CSVParser", "Skipping Bad CSV Row");
                     continue;
                 }
+                count++;
                 ContentValues gameValues = new ContentValues();
                 gameValues.put("IMAGE", colums[0].trim());
                 gameValues.put("NAME", colums[1].trim());
@@ -85,6 +87,7 @@ public class MainActivity extends Activity {
                 gameValues.put("FAVORITE", 0);
                 db.insert("LIBRARY", null, gameValues);
                 Log.d("DummyDBpop", "Row populated: " + gameValues);
+                Log.d("DummyDBpop", "count: " + count);
             }
         } catch (IOException e) {
             Log.d("DummyDBpop", "Couldn't populate db: " + e);
