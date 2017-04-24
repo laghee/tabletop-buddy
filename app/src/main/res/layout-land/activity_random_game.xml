@@ -92,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
+            android:onClick="onSubmit"
             android:padding="15dp"
             android:text="Submit"
             />
