@@ -32,26 +32,26 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
 
-        //Min Player Spinner
-        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.minplayerspinner);
-        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minPlayers);
-        minPlayerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        minPlayerSpinner.setAdapter(minPlayerAdapter);
-        minPlayerSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-
-        //Min Age Spinner
-        Spinner minAgeSpinner = (Spinner) findViewById(R.id.minagespinner);
-        ArrayAdapter<String> minAgeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minAges);
-        minAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        minAgeSpinner.setAdapter(minAgeAdapter);
-        minAgeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-
-        //Min Time Spinner
-        Spinner minTimeSpinner = (Spinner) findViewById(R.id.mintimespinner);
-        ArrayAdapter<String> minTimeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minTimes);
-        minTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        minTimeSpinner.setAdapter(minTimeAdapter);
-        minTimeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+//        //Min Player Spinner
+//        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.minplayerspinner);
+//        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minPlayers);
+//        minPlayerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        minPlayerSpinner.setAdapter(minPlayerAdapter);
+//        minPlayerSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+//
+//        //Min Age Spinner
+//        Spinner minAgeSpinner = (Spinner) findViewById(R.id.minagespinner);
+//        ArrayAdapter<String> minAgeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minAges);
+//        minAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        minAgeSpinner.setAdapter(minAgeAdapter);
+//        minAgeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+//
+//        //Min Time Spinner
+//        Spinner minTimeSpinner = (Spinner) findViewById(R.id.mintimespinner);
+//        ArrayAdapter<String> minTimeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minTimes);
+//        minTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        minTimeSpinner.setAdapter(minTimeAdapter);
+//        minTimeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
     }
 
     @Override

@@ -111,7 +111,7 @@
            android:text="criterion 1:"
            android:layout_height="wrap_content" />
        <Spinner
-            android:id="@+id/themespinner"
+            android:id="@+id/mintimespinner"
             android:layout_width="wrap_content"
             android:spinnerMode="dialog"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             android:text="criterion 3:"
             android:layout_height="wrap_content" />
         <Spinner
-            android:id="@+id/minplayerspinner"
+            android:id="@+id/minagespinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/dud_array"

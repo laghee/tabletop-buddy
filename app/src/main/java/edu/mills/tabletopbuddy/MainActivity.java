@@ -26,13 +26,15 @@ public class MainActivity extends Activity {
 // Kate
 //         setContentView(R.layout.activity_main);
 //         makeDummyDatabase();
-        setContentView(R.layout.activity_random_game);
+        setContentView(R.layout.activity_main);
     }
 
     public void onSearch(View view){
-        Toast toast = Toast.makeText(this, searchToast, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
-        toast.show();
+//        Toast toast = Toast.makeText(this, searchToast, Toast.LENGTH_LONG);
+//        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
+//        toast.show();
+        Intent searchIntent = new Intent(this, SearchActivity.class);
+        startActivity(searchIntent);
     }
 //    public void onViewLibrary(View view){
 //        Intent intent = new Intent(this, MyLibraryActivity.class);
@@ -40,8 +42,8 @@ public class MainActivity extends Activity {
 //    }
 
     public void onRandomGenerator(View v){
-        Intent randintent = new Intent(this, RandomGameActivity.class);
-        startActivity(randintent);
+        Intent randIntent = new Intent(this, RandomGameActivity.class);
+        startActivity(randIntent);
     }
 
     private void makeDummyDatabase() {
