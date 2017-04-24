@@ -71,13 +71,6 @@ public class MyLibraryActivity extends ListActivity {
 }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        cursor.close();
-        db.close();
-    }
-
-    @Override
     public void onListItemClick(ListView listView,
                                 View itemView,
                                 int position,
@@ -86,4 +79,13 @@ public class MyLibraryActivity extends ListActivity {
         intent.putExtra(GameDetailActivity.EXTRA_GAMENO, (int) id);
         startActivity(intent);
     }
+    
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        cursor.close();
+        db.close();
+    }
+
+
 }

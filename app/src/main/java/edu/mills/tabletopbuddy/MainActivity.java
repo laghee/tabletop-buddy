@@ -24,7 +24,6 @@ public class MainActivity extends Activity {
 // Kate
         setContentView(R.layout.activity_main);
         makeDummyDatabase();
-//        setContentView(R.layout.activity_random_game);
     }
 
     public void onSearch(View view){

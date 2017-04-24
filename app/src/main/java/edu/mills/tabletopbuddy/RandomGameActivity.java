@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -29,7 +31,7 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
-//
+
 //        //Min Player Spinner
 //        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.minplayerspinner);
 //        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minPlayers);
@@ -54,16 +56,16 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        Spinner minPlayerSpinner = (Spinner) parent;
-//        Spinner minAgeSpinner = (Spinner) parent;
-//        Spinner minTimeSpinner = (Spinner) parent;
-//
-//        if(minTimeSpinner.getId() == R.id.mintimespinner) {
-//            selectedMinTime = parent.getItemAtPosition(position).toString(); }
-//        if (minPlayerSpinner.getId() == R.id.minplayerspinner) {
-//            selectedMinPlayer = parent.getItemAtPosition(position).toString(); }
-//        if (minAgeSpinner.getId() == R.id.minagespinner) {
-//            selectedMinAge = parent.getItemAtPosition(position).toString(); }
+        Spinner minPlayerSpinner = (Spinner) parent;
+        Spinner minAgeSpinner = (Spinner) parent;
+        Spinner minTimeSpinner = (Spinner) parent;
+
+        if(minTimeSpinner.getId() == R.id.mintimespinner) {
+            selectedMinTime = parent.getItemAtPosition(position).toString(); }
+        if (minPlayerSpinner.getId() == R.id.minplayerspinner) {
+            selectedMinPlayer = parent.getItemAtPosition(position).toString(); }
+        if (minAgeSpinner.getId() == R.id.minagespinner) {
+            selectedMinAge = parent.getItemAtPosition(position).toString(); }
     }
 
     @Override
@@ -72,20 +74,20 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
     }
 
     //Generates a random number to query the database
-//    public int generateRandomNumber(Boolean collection) {
-//        int min = 0;
-//        int max;
-//
-//        //if the game is selected within personal collection
-//        if (collection) {
-//            //personal collection size
-//            max = 100;
-//        }
-//        else {
-//            max = 3333;
-//        }
-//        return min + (int)(Math.random() * max);
-//    }
+    public int generateRandomNumber(Boolean collection) {
+        int min = 0;
+        int max;
+
+        //if the game is selected within personal collection
+        if (collection) {
+            //personal collection size
+            max = 100;
+        }
+        else {
+            max = 3333;
+        }
+        return min + (int)(Math.random() * max);
+    }
 
     //Call GameDetailActivity with Spinner Results
 }

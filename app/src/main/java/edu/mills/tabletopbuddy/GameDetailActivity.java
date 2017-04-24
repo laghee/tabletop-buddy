@@ -48,7 +48,6 @@ public class GameDetailActivity extends Activity {
                 int maxTimeNo = cursor.getInt(4);
                 int minAgeNo = cursor.getInt(5);
 
-
 //                int photoId = cursor.getInt(8);
 //                boolean isFavorite = (cursor.getInt(9) == 1);
 

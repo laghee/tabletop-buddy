@@ -45,9 +45,9 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 1) {
             db.execSQL("DROP TABLE IF EXISTS LIBRARY");
             db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "IMAGE TEXT NOT NULL, "
+//                    + "IMAGE TEXT NOT NULL, "
                     + "NAME TEXT NOT NULL, "
-                    + "DESCRIPTION TEXT NOT NULL,"
+//                    + "DESCRIPTION TEXT NOT NULL,"
                     + "THEME TEXT NOT NULL, "
                     + "YEAR_PUBLISHED INTEGER NOT NULL, "
                     + "MY_RATING DOUBLE NOT NULL, "
