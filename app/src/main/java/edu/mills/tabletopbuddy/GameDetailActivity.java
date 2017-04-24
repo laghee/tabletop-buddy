@@ -95,6 +95,7 @@ public class GameDetailActivity extends Activity {
         }
     }
 
+
     //Update the database when the checkbox is clicked
     public void onFavoriteClicked(View view){
         int gameNo = (Integer)getIntent().getExtras().get("gameNo");

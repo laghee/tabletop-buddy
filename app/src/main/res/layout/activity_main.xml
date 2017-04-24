@@ -7,26 +7,27 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context="edu.mills.tabletopbuddy.MainActivity">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onSearch"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_button"
-            android:drawableLeft="@drawable/mag_glass_small"
-            android:padding="15dp"
-            android:layout_margin="10dp"
-            android:text ="@string/search"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onViewLibrary"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_button"
-            android:drawableLeft="@drawable/games_pile_small"
-            android:padding="15dp"
-            android:layout_margin="10dp"
-            android:text ="@string/my_library"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onSearch"
+        android:textSize="20sp"
+        android:background="@drawable/rounded_button"
+        android:drawableLeft="@drawable/mag_glass_small"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:text ="@string/search"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onViewLibrary"
+        android:textSize="20sp"
+        android:background="@drawable/rounded_button"
+        android:drawableLeft="@drawable/games_pile_small"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:text ="@string/my_library"/>
 
     <Button
         android:layout_width="wrap_content"

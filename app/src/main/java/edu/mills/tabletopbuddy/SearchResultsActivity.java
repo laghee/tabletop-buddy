@@ -58,7 +58,7 @@ public class SearchResultsActivity extends ListActivity {
                 return false;
         }
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

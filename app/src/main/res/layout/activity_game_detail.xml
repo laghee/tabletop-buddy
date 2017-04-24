@@ -22,14 +22,15 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_row="0">
+
             <TextView android:id="@+id/game_name"
                 android:textSize="22sp"
                 android:gravity="center"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
                 <!--android:text="Evil Fairy"-->
-
         </LinearLayout>
+
         <LinearLayout
             android:gravity="center"
             android:layout_column="1"
