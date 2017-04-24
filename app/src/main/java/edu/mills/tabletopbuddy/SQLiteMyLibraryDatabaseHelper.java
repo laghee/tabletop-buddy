@@ -20,20 +20,20 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
 //        updateMyDatabase(db, 0, DB_VERSION);
         db.execSQL("DROP TABLE IF EXISTS LIBRARY");
         db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "IMAGE TEXT NOT NULL, "
-                + "NAME TEXT NOT NULL, "
-                + "DESCRIPTION TEXT NOT NULL,"
-                + "THEME TEXT NOT NULL, "
-                + "YEAR_PUBLISHED INTEGER NOT NULL, "
-                + "MY_RATING DOUBLE NOT NULL, "
-                + "BGG_RATING DOUBLE NOT NULL, "
-                + "BGG_ID INTEGER NOT NULL, "
-                + "MIN_PLAYERS INTEGER NOT NULL, "
-                + "MAX_PLAYERS INTEGER NOT NULL, "
-                + "MIN_TIME INTEGER NOT NULL, "
-                + "MAX_TIME INTEGER NOT NULL, "
-                + "MIN_AGE INTEGER NOT NULL, "
-                + "FAVORITE INTEGER NOT NULL);");
+//                + "IMAGE TEXT NOT NULL, "
+                + "NAME TEXT, "
+//                + "DESCRIPTION TEXT NOT NULL,"
+//                + "THEME TEXT NOT NULL, "
+                + "YEAR_PUBLISHED INTEGER, "
+                + "MY_RATING DOUBLE, "
+                + "BGG_RATING DOUBLE, "
+                + "BGG_ID INTEGER, "
+                + "MIN_PLAYERS INTEGER, "
+                + "MAX_PLAYERS INTEGER, "
+                + "MIN_TIME INTEGER, "
+                + "MAX_TIME INTEGER, "
+                + "MIN_AGE INTEGER);");
+//                + "FAVORITE INTEGER);");
     }
 
     @Override
