@@ -1,22 +1,18 @@
 package edu.mills.tabletopbuddy;
 
 import android.app.ListActivity;
-import android.app.Activity;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.ListAdapter;
-import android.view.View;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
-import android.widget.SimpleCursorAdapter;
 
 // Correctly queries games added to MyGameDatabase and populates view
 // of personal library.
@@ -74,10 +70,22 @@ public class MyLibraryActivity extends ListActivity {
     }
 }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         cursor.close();
         db.close();
     }
+    @Override
+    public void onListItemClick(ListView listView,
+                                View itemView,
+                                int position,
+                                long id) {
+        Intent intent = new Intent(MyLibraryActivity.this, GameDetailActivity.class);
+        intent.putExtra(GameDetailActivity.EXTRA_GAMENO, (int) id);
+        startActivity(intent);
+    }
+
+
 }

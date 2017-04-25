@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,8 +47,6 @@ public class RandomGameActivity extends Activity {
         //Min Time Spinner
         Spinner minTimeSpinner = (Spinner) findViewById(R.id.timespinner);
         selectedMinTime = String.valueOf(minTimeSpinner.getSelectedItem());
-
-
     }
 
 
@@ -90,8 +87,6 @@ public class RandomGameActivity extends Activity {
 
         }
 
-
-
     //Generates a random number to query the database
     public int generateRandomNumber(Boolean collection) {
         int min = 0;
@@ -107,5 +102,5 @@ public class RandomGameActivity extends Activity {
         }
         return min + (int)(Math.random() * max);
     }
-
 }
+
