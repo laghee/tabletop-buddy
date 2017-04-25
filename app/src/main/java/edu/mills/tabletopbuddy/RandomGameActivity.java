@@ -1,76 +1,91 @@
 package edu.mills.tabletopbuddy;
 
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class RandomGameActivity extends Activity implements AdapterView.OnItemSelectedListener {
-    String[] minAges = {"7", "8", "9", "10", "11", "12", "13"};
-    String[] minTimes = {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4"};
-    String[] minPlayers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    String selectedMinAge;
+public class RandomGameActivity extends Activity {
     String selectedMinTime;
     String selectedMinPlayer;
-    ArrayList<String> selectedCategories = new ArrayList<String>();
-
-    //References
-    //http://stackoverflow.com/questions/12594207/using-multiple-spinners-in-the-same-layout
-    //http://stackoverflow.com/questions/13909109/two-spinner-in-one-activity
-    //https://www.tutorialspoint.com/android/android_spinner_control.htm
-    //http://stackoverflow.com/questions/363681/how-to-generate-random-integers-within-a-specific-range-in-java
-
-    //Made changes to strings.xml and activity_random_game.xml
-    //No changes made to AndroidManifest.xml
+    String selectedMinAge;
+    String category;
+    SQLiteDatabase db;
+    Cursor cursor;
+    ArrayList<String> matchedGames = new ArrayList<String>();
+    private static String resultToast = "";
+    Integer gamenumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
 
-//        //Min Player Spinner
-//        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.minplayerspinner);
-//        ArrayAdapter<String> minPlayerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minPlayers);
-//        minPlayerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        minPlayerSpinner.setAdapter(minPlayerAdapter);
-//        minPlayerSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-//
-//        //Min Age Spinner
-//        Spinner minAgeSpinner = (Spinner) findViewById(R.id.minagespinner);
-//        ArrayAdapter<String> minAgeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minAges);
-//        minAgeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        minAgeSpinner.setAdapter(minAgeAdapter);
-//        minAgeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-//
-//        //Min Time Spinner
-//        Spinner minTimeSpinner = (Spinner) findViewById(R.id.mintimespinner);
-//        ArrayAdapter<String> minTimeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, minTimes);
-//        minTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        minTimeSpinner.setAdapter(minTimeAdapter);
-//        minTimeSpinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+        //Category Spinner
+        Spinner categorySpinner = (Spinner) findViewById(R.id.categoryspinner);
+        category = String.valueOf(categorySpinner.getSelectedItem());
+        //Min Player Spinner
+        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.playerspinner);
+        selectedMinPlayer = String.valueOf(minPlayerSpinner.getSelectedItem());
+
+        //Min Age Spinner
+        Spinner minAgeSpinner = (Spinner) findViewById(R.id.agespinner);
+        selectedMinAge = String.valueOf(minAgeSpinner.getSelectedItem());
+        //String beerType = String.valueOf(color.getSelectedItem());
+
+        //Min Time Spinner
+        Spinner minTimeSpinner = (Spinner) findViewById(R.id.timespinner);
+        selectedMinTime = String.valueOf(minTimeSpinner.getSelectedItem());
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Spinner minPlayerSpinner = (Spinner) parent;
-        Spinner minAgeSpinner = (Spinner) parent;
-        Spinner minTimeSpinner = (Spinner) parent;
 
-        if(minTimeSpinner.getId() == R.id.mintimespinner) {
-            selectedMinTime = parent.getItemAtPosition(position).toString(); }
-        if (minPlayerSpinner.getId() == R.id.minplayerspinner) {
-            selectedMinPlayer = parent.getItemAtPosition(position).toString(); }
-        if (minAgeSpinner.getId() == R.id.minagespinner) {
-            selectedMinAge = parent.getItemAtPosition(position).toString(); }
+    public void onSubmit(View view){
+//        resultToast += category + selectedMinPlayer + selectedMinTime + selectedMinAge;
+//        Toast toast = Toast.makeText(this, resultToast, Toast.LENGTH_LONG);
+//        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
+//        toast.show();
+        new RetrieveGamesTask().execute();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    //Inner class to get games
+    private class RetrieveGamesTask extends AsyncTask<Void, Void, Cursor> {
+        @Override
+        protected Cursor doInBackground(Void... values) {
+            SQLiteOpenHelper SQLiteMyLibraryDatabaseHelper =
+                    new SQLiteMyLibraryDatabaseHelper(RandomGameActivity.this);
+            try {
+                db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
+                cursor = db.query("LIBRARY", new String[]{"_id"},
+                        null, null, null, null, null, null);
+                return cursor;
+            } catch (SQLiteException e) {
+                return null;
+            }
+        }
 
-    }
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            int max = cursor.getCount()-1;
+            //int position = (0 + max)/2 ;
+            cursor.moveToPosition(max);
+            gamenumber = cursor.getInt(0);
+            Toast toast = Toast.makeText(RandomGameActivity.this, String.valueOf(gamenumber), Toast.LENGTH_SHORT);
+            toast.show();
+                db.close();
+            }
+
+        }
 
     //Generates a random number to query the database
     public int generateRandomNumber(Boolean collection) {
@@ -87,6 +102,5 @@ public class RandomGameActivity extends Activity implements AdapterView.OnItemSe
         }
         return min + (int)(Math.random() * max);
     }
-
-    //Call GameDetailActivity with Spinner Results
 }
+
