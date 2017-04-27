@@ -12,10 +12,11 @@
         android:rowCount="2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <ImageView android:id="@+id/photo"
             android:src="@drawable/fairy"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_rowSpan="2"/>
         <LinearLayout
             android:layout_column="1"
@@ -55,7 +56,6 @@
     <TextView android:id="@+id/theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 
     <LinearLayout
         android:orientation="horizontal"
