@@ -11,12 +11,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import java.util.List;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+
+import org.unbescape.xml.XmlEscape;
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -50,8 +54,10 @@ public class GameDetailActivity extends Activity {
 
         if (className.equals("MyLibraryActivity")) {
             new LibraryGameDetailTask().execute(gameNo);
-        } else if (className.equals("SearchResultsActivity")){
+        } else if (className.equals("SearchResultsActivity")) {
             new FetchBGGTask().execute(gameNo);
+        } else if (className.equals("RandomGameActivity")) {
+            new LibraryGameDetailTask().execute(gameNo);
         } else {
             Toast toast = Toast.makeText(this, "Something broke -- no class", Toast.LENGTH_SHORT);
             toast.show();
@@ -59,13 +65,12 @@ public class GameDetailActivity extends Activity {
     }
 
 
-
     private class FetchBGGTask extends AsyncTask<Integer, Void, FetchItem> {
         @Override
         protected FetchItem doInBackground(Integer... params) {
             int gameId = params[0];
             try {
-                FetchItem fetchedItem = BGG.fetch(Arrays.asList(gameId), ThingType.BOARDGAME).iterator().next();
+                FetchItem fetchedItem = BGG.fetch(Arrays.asList(gameId), ThingType.BOARDGAME, ThingType.BOARDGAME_EXPANSION).iterator().next();
                 return fetchedItem;
 
             } catch (FetchException e) {
@@ -76,50 +81,72 @@ public class GameDetailActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute (FetchItem fetchedItem) {
-            //Populate the game image
-            ImageView photo = (ImageView)findViewById(R.id.photo);
-            Log.d("Image: ", fetchedItem.getImageUrl());
-            gameImageUrl = "https:" + fetchedItem.getImageUrl();
+        protected void onPostExecute(FetchItem fetchedItem) {
+
+            String unescapedDes;
+
+            if (fetchedItem != null) {
+                //Populate the game image
+                ImageView photo = (ImageView) findViewById(R.id.photo);
+                Log.d("Image: ", fetchedItem.getImageUrl());
+                gameImageUrl = "https:" + fetchedItem.getImageUrl();
 //            gameImageUrl = gameImageUrl.substring(0, gameImageUrl.length() - 4);
 //            gameImageUrl = gameImageUrl.concat("_md.jpg");
-            Log.d("Image: ", gameImageUrl);
-            Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
+                Log.d("Image: ", gameImageUrl);
+                Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
 
-            //Populate the game name
-            TextView name = (TextView)findViewById(R.id.game_name);
-            gameName = fetchedItem.getName();
-            name.setText(gameName);
+                //Populate the game name
+                TextView name = (TextView) findViewById(R.id.game_name);
+                gameName = fetchedItem.getName();
+                name.setText(gameName);
 
-            //Populate the game description
-            TextView description = (TextView)findViewById(R.id.description);
-            gameDescription = fetchedItem.getDescription();
-            description.setText(gameDescription);
+//                //Populate the game description
+//                TextView description = (TextView) findViewById(R.id.description);
+//                gameDescription = fetchedItem.getDescription();
+//                description.setText(gameDescription);
 
-            //Populate the game categories
+                //Populate the game categories
 //            theme = (TextView)findViewById(R.id.theme);
 //            String themeText = fetchedItem.getCategories();
 //                theme.setText(themeText);
-            //Populate the game pub year
+                //Populate the game pub year
 //            TextView year = (TextView)findViewById(R.id.year);
 //            String year = fetchedItem.getYear();
 //            year.setText(year);
 
-            //Populate the game min and max players
-            TextView players = (TextView)findViewById(R.id.players);
-            playerNum = fetchedItem.getMinPlayers().getValue() + " - " +
-                    fetchedItem.getMaxPlayers().getValue() + " players";
-            players.setText(playerNum);
+                //Populate the game min and max players
+                TextView players = (TextView) findViewById(R.id.players);
+                playerNum = fetchedItem.getMinPlayers().getValue() + " - " +
+                        fetchedItem.getMaxPlayers().getValue() + " players";
+                players.setText(playerNum);
 
-            //Populate the game min and max time
-            TextView time = (TextView)findViewById(R.id.time);
-            timeNum = fetchedItem.getPlayingTime().getValue() + " mins";
-            time.setText(timeNum);
+                //Populate the game min and max time
+                TextView time = (TextView) findViewById(R.id.time);
+                timeNum = fetchedItem.getPlayingTime().getValue() + " mins";
+                time.setText(timeNum);
 
-            //Populate the game min age
-            TextView minAge = (TextView)findViewById(R.id.ages);
-            ageNum =  "ages: " + fetchedItem.getMinAge().getValue() + "+";
-            minAge.setText(ageNum);
+                //Populate the game min age
+                TextView minAge = (TextView) findViewById(R.id.ages);
+                ageNum = "ages: " + fetchedItem.getMinAge().getValue() + "+";
+                minAge.setText(ageNum);
+
+                //Populate the game theme
+                TextView theme = (TextView) findViewById(R.id.theme);
+                List<String> themeList = fetchedItem.getCategories();
+                theme.setText(themeList.toString());
+
+                //Populate the game description
+                TextView description = (TextView) findViewById(R.id.description);
+                unescapedDes = XmlEscape.unescapeXml(fetchedItem.getDescription());
+                unescapedDes = HtmlEscape.unescapeHtml(unescapedDes);
+                description.setText(unescapedDes);
+            } else
+
+            {
+                Toast toast = Toast.makeText(GameDetailActivity.this,
+                        "Error retrieving game", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 
