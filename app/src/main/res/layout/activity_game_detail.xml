@@ -44,13 +44,12 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp" />
                 <!--android:text="5.5"-->
-
-            <CheckBox android:id="@+id/favorite"
+            <CheckBox android:id="@+id/addToLibrary"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/favorite"
-                android:onClick="onFavoriteClicked"/>
+                android:text="@string/addGame"
+                android:onClick="onAddToLibraryClicked"/>
         </LinearLayout>
     </GridLayout>
     <TextView android:id="@+id/theme"
