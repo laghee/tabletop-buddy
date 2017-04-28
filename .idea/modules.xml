@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TabletopBuddy.iml" filepath="$PROJECT_DIR$/TabletopBuddy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TabletopBuddyReboot.iml" filepath="$PROJECT_DIR$/TabletopBuddyReboot.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
