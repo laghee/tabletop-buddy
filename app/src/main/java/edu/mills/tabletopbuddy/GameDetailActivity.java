@@ -11,7 +11,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import java.util.List;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,10 +18,11 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.unbescape.html.HtmlEscape;
 import org.unbescape.xml.XmlEscape;
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
+import java.util.List;
 
 import edu.mills.tabletopbuddy.bggclient.BGG;
 import edu.mills.tabletopbuddy.bggclient.common.ThingType;
@@ -83,8 +83,6 @@ public class GameDetailActivity extends Activity {
         @Override
         protected void onPostExecute(FetchItem fetchedItem) {
 
-            String unescapedDes;
-
             if (fetchedItem != null) {
                 //Populate the game image
                 ImageView photo = (ImageView) findViewById(R.id.photo);
@@ -137,9 +135,9 @@ public class GameDetailActivity extends Activity {
 
                 //Populate the game description
                 TextView description = (TextView) findViewById(R.id.description);
-                unescapedDes = XmlEscape.unescapeXml(fetchedItem.getDescription());
-                unescapedDes = HtmlEscape.unescapeHtml(unescapedDes);
-                description.setText(unescapedDes);
+                gameDescription = XmlEscape.unescapeXml(fetchedItem.getDescription());
+                gameDescription = HtmlEscape.unescapeHtml(gameDescription);
+                description.setText(gameDescription);
             } else
 
             {

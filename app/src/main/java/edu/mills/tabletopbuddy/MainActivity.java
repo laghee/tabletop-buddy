@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
     }
 
     public void onRandomGenerator(View v){
-//        Intent randintent = new Intent(this, RandomGameActivity.class);
-//        startActivity(randintent);
+        Intent randintent = new Intent(this, RandomGameActivity.class);
+        startActivity(randintent);
     }
 
     private void makeDummyDatabase() {
