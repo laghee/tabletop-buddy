@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,8 +18,6 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.Arrays;
 
 import edu.mills.tabletopbuddy.bggclient.BGG;
@@ -31,7 +28,7 @@ import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
 public class GameDetailActivity extends Activity {
     public static final String EXTRA_GAMENO = "gameNo";
     public static final String EXTRA_CLASSNAME = "class";
-//    private Cursor cursor;
+    //    private Cursor cursor;
 //    private SQLiteDatabase db;
     String gameUrl;
     String gameName;
@@ -39,8 +36,6 @@ public class GameDetailActivity extends Activity {
     String playerNum;
     String timeNum;
     String ageNum;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

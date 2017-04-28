@@ -18,7 +18,6 @@ import android.widget.Toast;
 // of personal library.
 // Users are able to add and delete games from their local library.
 public class MyLibraryActivity extends ListActivity {
-
     private SQLiteDatabase db;
     private Cursor cursor;
     //view saved games

@@ -10,7 +10,9 @@
     <string name="spinner_player_title">Players</string>
     <string name="spinner_time_title">Time</string>
     <string name="spinner_age_title">Age</string>
+
     <string-array name="players">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -22,6 +24,7 @@
         <item>9</item>
     </string-array>
     <string-array name="ages">
+        <item></item>
         <item>7</item>
         <item>8</item>
         <item>9</item>
@@ -32,16 +35,41 @@
         <item>14</item>
     </string-array>
     <string-array name="times">
-        <item>0.5</item>
-        <item>1</item>
-        <item>1.5</item>
-        <item>2</item>
-        <item>2.5</item>
-        <item>3</item>
-        <item>3.5</item>
+        <item>0</item>
+        <item>15</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>75</item>
+        <item>90</item>
+        <item>105</item>
+        <item>120</item>
+    </string-array>
+    <string-array name="reverse_players">
+        <item>1000</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
         <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+    <string-array name="reverse_times">
+        <item>1000</item>
+        <item>120</item>
+        <item>105</item>
+        <item>90</item>
+        <item>75</item>
+        <item>60</item>
+        <item>45</item>
+        <item>30</item>
+        <item>15</item>
     </string-array>
     <string-array name="categories">
+        <item></item>
         <item>Adventure</item>
         <item>Dice</item>
         <item>Mafia</item>
@@ -58,6 +86,8 @@
     <string name="spinner_category">Select Category</string>
     <string name="spinner_ages">Select Min Age</string>
     <string name="spinner_players">Select Min Players</string>
+    <string name="spinner_max_time">Max Time</string>
+    <string name="spinner_max_players">Max Players</string>
     <string name="spinner_time">Select Min Time</string>
     <string name="lorem_ipsum">Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</string>
 

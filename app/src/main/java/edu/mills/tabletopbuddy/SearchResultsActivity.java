@@ -22,14 +22,11 @@ import java.util.List;
 
 import edu.mills.tabletopbuddy.bggclient.BGG;
 import edu.mills.tabletopbuddy.bggclient.common.ThingType;
-import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
 import edu.mills.tabletopbuddy.bggclient.search.SearchException;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchItem;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchOutput;
 
 public class SearchResultsActivity extends ListActivity {
-
-    private List<FetchItem> searchResultIds;
     private List<SearchItem> results;
 
     @Override
@@ -106,7 +103,6 @@ public class SearchResultsActivity extends ListActivity {
             }
         }
     }
-
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {

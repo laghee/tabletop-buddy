@@ -1,6 +1,7 @@
 package edu.mills.tabletopbuddy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -19,55 +20,55 @@ import java.util.ArrayList;
 public class RandomGameActivity extends Activity {
     String selectedMinTime;
     String selectedMinPlayer;
-    String selectedMinAge;
-    String category;
+    String selectedMaxPlayer;
+    String selectedMaxTime;
+    Spinner minTimeSpinner;
+    Spinner minPlayerSpinner;
+    Spinner maxTimeSpinner;
+    Spinner maxPlayerSpinner;
     SQLiteDatabase db;
     Cursor cursor;
-    ArrayList<String> matchedGames = new ArrayList<String>();
-    private static String resultToast = "";
     Integer gamenumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_game);
-
-        //Category Spinner
-        Spinner categorySpinner = (Spinner) findViewById(R.id.categoryspinner);
-        category = String.valueOf(categorySpinner.getSelectedItem());
-        //Min Player Spinner
-        Spinner minPlayerSpinner = (Spinner) findViewById(R.id.playerspinner);
-        selectedMinPlayer = String.valueOf(minPlayerSpinner.getSelectedItem());
-
-        //Min Age Spinner
-        Spinner minAgeSpinner = (Spinner) findViewById(R.id.agespinner);
-        selectedMinAge = String.valueOf(minAgeSpinner.getSelectedItem());
-        //String beerType = String.valueOf(color.getSelectedItem());
-
-        //Min Time Spinner
-        Spinner minTimeSpinner = (Spinner) findViewById(R.id.timespinner);
-        selectedMinTime = String.valueOf(minTimeSpinner.getSelectedItem());
     }
 
 
     public void onSubmit(View view){
-//        resultToast += category + selectedMinPlayer + selectedMinTime + selectedMinAge;
+        minTimeSpinner = (Spinner) findViewById(R.id.min_time_spinner);
+        selectedMinTime = String.valueOf(minTimeSpinner.getSelectedItem());
+        minPlayerSpinner = (Spinner) findViewById(R.id.min_player_spinner);
+        selectedMinPlayer =String.valueOf(minPlayerSpinner.getSelectedItem());
+        maxTimeSpinner = (Spinner) findViewById(R.id.max_time_spinner);
+        selectedMaxTime = String.valueOf(maxTimeSpinner.getSelectedItem());
+        maxPlayerSpinner = (Spinner) findViewById(R.id.max_players_spinner);
+        selectedMaxPlayer =String.valueOf(maxPlayerSpinner.getSelectedItem());
+//        resultToast = category + selectedMinPlayer + selectedMinTime + selectedMinAge;
 //        Toast toast = Toast.makeText(this, resultToast, Toast.LENGTH_LONG);
 //        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
 //        toast.show();
+
         new RetrieveGamesTask().execute();
     }
 
     //Inner class to get games
     private class RetrieveGamesTask extends AsyncTask<Void, Void, Cursor> {
+
+
         @Override
         protected Cursor doInBackground(Void... values) {
             SQLiteOpenHelper SQLiteMyLibraryDatabaseHelper =
                     new SQLiteMyLibraryDatabaseHelper(RandomGameActivity.this);
+            String[] selectArgs = new String[]{selectedMinTime, selectedMinPlayer, selectedMaxTime, selectedMaxPlayer};
+
             try {
                 db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
-                cursor = db.query("LIBRARY", new String[]{"_id"},
-                        null, null, null, null, null, null);
+//                cursor = db.query("LIBRARY", new String[]{"_id", "MIN_AGE"},
+//                        "MIN_AGE ==" +selectedMinAge,null, null, null, null, null);
+                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE MIN_TIME >=? AND MIN_PLAYERS>=? AND MAX_TIME<=? AND MAX_PLAYERS<=?", selectArgs);
                 return cursor;
             } catch (SQLiteException e) {
                 return null;
@@ -76,31 +77,45 @@ public class RandomGameActivity extends Activity {
 
         @Override
         protected void onPostExecute(Cursor cursor) {
-            int max = cursor.getCount()-1;
-            //int position = (0 + max)/2 ;
-            cursor.moveToPosition(max);
-            gamenumber = cursor.getInt(0);
-            Toast toast = Toast.makeText(RandomGameActivity.this, String.valueOf(gamenumber), Toast.LENGTH_SHORT);
-            toast.show();
-                db.close();
+            if (cursor.moveToFirst()) {
+                int max = cursor.getCount() - 1;
+                //int position = (0 + max)/2 ;
+
+
+                int position = (int) (Math.random() * max);
+                cursor.moveToPosition(position);
+                gamenumber = cursor.getInt(0);
+                Intent intent = new Intent(RandomGameActivity.this, GameDetailActivity.class);
+                intent.putExtra(GameDetailActivity.EXTRA_GAMENO, gamenumber);
+                startActivity(intent);
+
+//                Toast toast = Toast.makeText(RandomGameActivity.this, String.valueOf(max)+1 +" games match your criteria", Toast.LENGTH_SHORT);
+//                toast.show();
             }
+            else{
+                Toast toast = Toast.makeText(RandomGameActivity.this, "sorry, no games match your criteria :(", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            db.close();
+            cursor.close();
 
         }
 
-    //Generates a random number to query the database
-    public int generateRandomNumber(Boolean collection) {
-        int min = 0;
-        int max;
 
-        //if the game is selected within personal collection
-        if (collection) {
-            //personal collection size
-            max = 100;
-        }
-        else {
-            max = 3333;
-        }
-        return min + (int)(Math.random() * max);
     }
+
+//    //Generates a random number to query the database
+//    public int generateRandomNumber(int max) {
+//
+//        //if the game is selected within personal collection
+////        if (collection) {
+////            //personal collection size
+////            max = 100;
+////        }
+////        else {
+////            max = 3333;
+////        }
+//        return (int)(Math.random() * max);
+//    }
 }
 
