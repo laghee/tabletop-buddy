@@ -56,7 +56,7 @@ public class GameDetailActivity extends Activity {
             new LibraryGameDetailTask().execute(gameNo);
         } else if (className.equals("SearchResultsActivity")) {
             new FetchBGGTask().execute(gameNo);
-        } else if (className.equals("GameDetailActivty")) {
+        } else if (className.equals("RandomGameActivity")) {
             new FetchBGGTask().execute(gameNo);
         } else {
             Toast toast = Toast.makeText(this, "Something broke -- no class", Toast.LENGTH_SHORT);
