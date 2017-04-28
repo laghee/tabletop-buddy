@@ -23,54 +23,44 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
-                android:text="@string/spinner_max_players"
-                android:layout_height="wrap_content" />
-            <Spinner
-                android:id="@+id/max_players_spinner"
-                android:layout_width="wrap_content"
-                android:spinnerMode="dialog"
-                android:layout_height="wrap_content"
-                android:entries="@array/reverse_players"
-                android:prompt="@string/spinner_max_players"/>
-        </LinearLayout>
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="30dp"/>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="@string/spinner_max_time"
-                android:layout_height="wrap_content" />
-            <Spinner
-                android:id="@+id/max_time_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/reverse_times"
-                android:prompt="@string/spinner_max_time"/>
-        </LinearLayout>
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="30dp"/>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
+
                 android:text="Min Players:"
                 android:layout_height="wrap_content" />
             <Spinner
                 android:id="@+id/min_player_spinner"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:entries="@array/players"
                 android:prompt="@string/spinner_players"/>
+
         </LinearLayout>
         <Space
-            android:layout_width="1dp"
+            android:layout_width="20dp"
+            android:layout_height="30dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:text="@string/spinner_max_players"
+                android:layout_height="wrap_content" />
+            <Spinner
+                android:id="@+id/max_players_spinner"
+
+                android:layout_width="wrap_content"
+                android:spinnerMode="dialog"
+                android:layout_height="wrap_content"
+
+                android:entries="@array/reverse_players"
+                android:prompt="@string/spinner_max_players"/>
+
+        </LinearLayout>
+        <Space
+            android:layout_width="20dp"
             android:layout_height="30dp"/>
         <LinearLayout
             android:orientation="vertical"
@@ -81,12 +71,39 @@
                 android:text="Min Time:"
                 android:layout_height="wrap_content" />
             <Spinner
+
                 android:id="@+id/min_time_spinner"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/times"
                 android:prompt="@string/spinner_time"/>
         </LinearLayout>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="30dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="@string/spinner_max_time"
+                android:layout_height="wrap_content" />
+            <Spinner
+
+                android:id="@+id/max_time_spinner"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/reverse_times"
+                android:prompt="@string/spinner_max_time"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="30dp"/>
+
+
         <Button
             android:id="@+id/get_random_button"
             android:layout_width="wrap_content"
