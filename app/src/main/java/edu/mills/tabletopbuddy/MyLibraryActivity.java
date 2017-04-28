@@ -77,6 +77,7 @@ public class MyLibraryActivity extends ListActivity {
         cursor.close();
         db.close();
     }
+
     @Override
     public void onListItemClick(ListView listView,
                                 View itemView,
@@ -84,6 +85,7 @@ public class MyLibraryActivity extends ListActivity {
                                 long id) {
         Intent intent = new Intent(MyLibraryActivity.this, GameDetailActivity.class);
         intent.putExtra(GameDetailActivity.EXTRA_GAMENO, (int) id);
+        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, "MyLibraryActivity");
         startActivity(intent);
     }
 
