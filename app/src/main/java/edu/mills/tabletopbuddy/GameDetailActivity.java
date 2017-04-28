@@ -248,6 +248,10 @@ public class GameDetailActivity extends Activity {
         String minplayers = playersMinMax[0];
         String maxplayers = playersMinMax[1];
 
+        maxplayers = maxplayers.substring(0, maxplayers.length() - 8);
+        timeNum = timeNum.substring(0, timeNum.length() - 5);
+
+
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", gameImageUrl);
         gameValues.put("NAME", gameName);
@@ -262,6 +266,7 @@ public class GameDetailActivity extends Activity {
         gameValues.put("MIN_AGE", ageNum);
 
         Log.d("GameDetailActivity", "About to call execute AddGameAsyncTask");
+        Log.d("Game:", gameValues.toString());
         new AddGameToLibraryTask().execute(gameValues);
     }
 
