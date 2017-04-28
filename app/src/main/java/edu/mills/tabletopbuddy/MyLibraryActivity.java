@@ -76,6 +76,7 @@ public class MyLibraryActivity extends ListActivity {
         cursor.close();
         db.close();
     }
+
     @Override
     public void onListItemClick(ListView listView,
                                 View itemView,

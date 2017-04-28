@@ -4,7 +4,6 @@ import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +27,7 @@ import edu.mills.tabletopbuddy.bggclient.search.domain.SearchItem;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchOutput;
 
 public class SearchResultsActivity extends ListActivity {
-    public List<SearchItem> results;
+    private List<SearchItem> results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,16 +67,15 @@ public class SearchResultsActivity extends ListActivity {
             String query = params[0];
             try {
                 SearchOutput items = BGG.search(query, ThingType.BOARDGAME);
-                results = items.getItems();
-                Log.d("Results: ", results.toString());
-                return results;
-            } catch (SQLiteException e) {
-                return null;
+                if (items != null) {
+                    results = items.getItems();
+                    Log.d("Results: ", results.toString());
+                    return results;
+                } else {
+                    return null;
+                }
             } catch (SearchException e) {
                 e.printStackTrace();
-                Log.d("Caught:", e.getMessage());
-                return null;
-            } catch (NullPointerException e) {
                 Log.d("Caught:", e.getMessage());
                 return null;
             }
@@ -94,6 +92,11 @@ public class SearchResultsActivity extends ListActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchResultsActivity.this,
                         android.R.layout.simple_list_item_1, names);
                 SearchResultsActivity.this.setListAdapter(adapter);
+
+                List<Integer> resultIds = new ArrayList<>();
+                for (SearchItem item : res) {
+                    resultIds.add(item.getId());
+                }
             } else {
                 Toast toast = Toast.makeText(SearchResultsActivity.this, "No results found", Toast.LENGTH_SHORT);
                 toast.show();
@@ -105,6 +108,7 @@ public class SearchResultsActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
 //        String item = (String) getListAdapter().getItem(position);
 //        Toast.makeText(this, item + " selected", Toast.LENGTH_SHORT).show();
+
         SearchItem searchItem = results.get(position);
         int clickedId = searchItem.getId();
 
