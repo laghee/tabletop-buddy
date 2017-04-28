@@ -138,7 +138,7 @@ public class GameDetailActivity extends Activity {
                 //Populate the game description
                 TextView description = (TextView) findViewById(R.id.description);
                 unescapedDes = XmlEscape.unescapeXml(fetchedItem.getDescription());
-                description.setText(unescapedDes);
+                unescapedDes = HtmlEscape.unescapeHtml(unescapedDes);
                 description.setText(unescapedDes);
             } else
 
