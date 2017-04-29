@@ -125,6 +125,6 @@
             android:background="@drawable/rounded_button"
             android:onClick="onSubmit"
             android:padding="15dp"
-            android:text="Get Random Game" />
+            android:text="@string/get_random" />
     </LinearLayout>
 </LinearLayout>
