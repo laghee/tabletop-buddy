@@ -19,7 +19,7 @@ public class RandomGameActivity extends Activity {
     String selectedPlayTime;
 //    Spinner minTimeSpinner;
     Spinner minPlayerSpinner;
-    Spinner playTimeSpinner;
+    Spinner maxTimeSpinner;
     Spinner maxPlayerSpinner;
     SQLiteDatabase db;
     Cursor cursor;
@@ -32,8 +32,8 @@ public class RandomGameActivity extends Activity {
     }
 
     public void onSubmit(View view){
-        playTimeSpinner = (Spinner) findViewById(R.id.play_time_spinner);
-        selectedPlayTime = String.valueOf(playTimeSpinner.getSelectedItem());
+        maxTimeSpinner = (Spinner) findViewById(R.id.max_time_spinner);
+        selectedPlayTime = String.valueOf(maxTimeSpinner.getSelectedItem());
         minPlayerSpinner = (Spinner) findViewById(R.id.min_player_spinner);
         selectedMinPlayer =String.valueOf(minPlayerSpinner.getSelectedItem());
 //        maxTimeSpinner = (Spinner) findViewById(R.id.max_time_spinner);
