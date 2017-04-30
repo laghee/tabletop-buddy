@@ -32,7 +32,7 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
                     + "DESCRIPTION TEXT,"
                     + "THEME TEXT, "
                     + "YEAR_PUBLISHED TEXT, "
-                    + "BGG_ID INTEGER, "
+                    + "BGG_ID INTEGER NOT NULL, "
                     + "MIN_PLAYERS TEXT, "
                     + "MAX_PLAYERS TEXT, "
                     + "PLAY_TIME TEXT, "
