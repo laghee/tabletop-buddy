@@ -27,26 +27,24 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "IMAGE TEXT NOT NULL, "
+                    + "IMAGE TEXT, "
                     + "NAME TEXT NOT NULL, "
                     + "DESCRIPTION TEXT,"
-//                    + "THEME TEXT, "
+                    + "THEME TEXT, "
 //                    + "YEAR_PUBLISHED TEXT, "
 //                    + "MY_RATING DOUBLE NOT NULL, "
 //                    + "BGG_RATING DOUBLE NOT NULL, "
                     + "BGG_ID INTEGER NOT NULL, "
-                    + "MIN_PLAYERS STRING NOT NULL, "
-                    + "MAX_PLAYERS STRING NOT NULL, "
-                    + "PLAY_TIME STRING NOT NULL, "
-                    + "MIN_AGE STRING NOT NULL);");
+                    + "MIN_PLAYERS TEXT, "
+                    + "MAX_PLAYERS TEXT, "
+                    + "PLAY_TIME TEXT, "
+                    + "MIN_AGE TEXT);");
         }
     }
 
-
-
-    private static void insertGame(SQLiteDatabase db, String image, String name, String description, String theme, String pubdate,
-                                   Double myrating, Double bggrating, Integer bggid, String minplayers, String maxplayers,
-                                   String playtime, String age) {
+    private static void insertGame(SQLiteDatabase db, String image, String name, String description,
+                                   String theme, String pubdate, Integer bggid, String minplayers,
+                                   String maxplayers, String playtime, String age) {
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", image);
         gameValues.put("NAME", name);
@@ -61,6 +59,10 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
         gameValues.put("PLAY_TIME", playtime);
         gameValues.put("MIN_AGE", age);
         db.insert("LIBRARY", null, gameValues);
+    }
+
+    private static void deleteGame(SQLiteDatabase db, String bggid) {
+        db.delete("LIBRARY", "ID = ?", new String[] {bggid.toString()});
     }
 
 }

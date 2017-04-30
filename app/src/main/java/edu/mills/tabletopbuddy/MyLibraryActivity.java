@@ -20,12 +20,21 @@ import android.widget.Toast;
 public class MyLibraryActivity extends ListActivity {
     private SQLiteDatabase db;
     private Cursor cursor;
+    private Cursor altCursor;
+    private CursorAdapter gameCursorAdapter;
+
     //view saved games
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new GameLibraryTask().execute();
-        //setContentView(R.layout.activity_my_library);
+        if (getIntent().getExtras() != null) {
+//            Integer gameDeleted = (Integer) getIntent().getExtras().get(GameDetailActivity.EXTRA_GAMENO);
+//            gameCursorAdapter.changeCursor(altCursor);
+            gameCursorAdapter.notifyDataSetChanged();
+        } else {
+            new GameLibraryTask().execute();
+            //setContentView(R.layout.activity_my_library);
+        }
     }
 
     private class GameLibraryTask extends AsyncTask<Void, Void, Cursor> {
@@ -54,8 +63,8 @@ public class MyLibraryActivity extends ListActivity {
         super.onPostExecute(cursor);
 
         ListView listGames = getListView();
-        if(cursor !=null) {
-            CursorAdapter gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
+        if (cursor != null) {
+            gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
                     android.R.layout.simple_list_item_1,
                     cursor,
                     new String[]{"NAME"},
