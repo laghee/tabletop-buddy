@@ -35,8 +35,8 @@ import static android.text.TextUtils.join;
 public class GameDetailActivity extends Activity {
     public static final String EXTRA_GAMENO = "gameNo";
     public static final String EXTRA_CLASSNAME = "class";
-    //    private Cursor cursor;
-//    private SQLiteDatabase db;
+    private Cursor cursor;
+    private SQLiteDatabase db;
     private String gameImageUrl;
     private String gameName;
     private String gameDescription;
@@ -154,8 +154,8 @@ public class GameDetailActivity extends Activity {
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
                         new SQLiteMyLibraryDatabaseHelper(GameDetailActivity.this);
-                SQLiteDatabase db = libraryDatabaseHelper.getReadableDatabase();
-                Cursor cursor = db.query("LIBRARY",
+                db = libraryDatabaseHelper.getReadableDatabase();
+                cursor = db.query("LIBRARY",
                         new String[]{"IMAGE", "NAME", "DESCRIPTION", "THEME", "MIN_PLAYERS",
                                 "MAX_PLAYERS", "PLAY_TIME", "MIN_AGE"}, "_id = ?",
                         new String[]{Integer.toString(gameId)},
@@ -235,8 +235,8 @@ public class GameDetailActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        cursor.close();
-//        db.close();
+        cursor.close();
+        db.close();
     }
 
 
@@ -284,7 +284,7 @@ public class GameDetailActivity extends Activity {
             ContentValues gameValues = games[0];
             SQLiteOpenHelper myLibraryDatabaseHelper = new SQLiteMyLibraryDatabaseHelper(GameDetailActivity.this);
             try {
-                SQLiteDatabase db = myLibraryDatabaseHelper.getWritableDatabase();
+                db = myLibraryDatabaseHelper.getWritableDatabase();
                 db.insert("LIBRARY", null, gameValues);
                 db.close();
                 Log.d("GameDetailActivity", "Successfully wrote to db");
@@ -301,10 +301,6 @@ public class GameDetailActivity extends Activity {
                 Toast toast = Toast.makeText(GameDetailActivity.this,
                         "Database unavailable", Toast.LENGTH_SHORT);
                 toast.show();
-            } else {
-                Intent intent = new Intent(GameDetailActivity.this, MyLibraryActivity.class);
-                intent.putExtra(GameDetailActivity.EXTRA_GAMENO, gameId);
-                startActivity(intent);
             }
         }
     }
@@ -318,7 +314,7 @@ public class GameDetailActivity extends Activity {
             Integer gameId = games[0].getAsInteger("LIBRARYID");
             SQLiteOpenHelper myLibraryDatabaseHelper = new SQLiteMyLibraryDatabaseHelper(GameDetailActivity.this);
             try {
-                SQLiteDatabase db = myLibraryDatabaseHelper.getWritableDatabase();
+                db = myLibraryDatabaseHelper.getWritableDatabase();
                 db.delete("LIBRARY", "_id = ?", new String[] {gameId.toString()});
                 db.close();
                 Log.d("GameDetailActivity", "Successfully removed game from db");
