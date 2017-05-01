@@ -51,8 +51,6 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
         gameValues.put("DESCRIPTION", description);
         gameValues.put("THEME", theme);
         gameValues.put("YEAR_PUBLISHED", pubdate);
-//        gameValues.put("MY_RATING", myrating);
-//        gameValues.put("BGG_RATING", bggrating);
         gameValues.put("BGG_ID", bggid);
         gameValues.put("MIN_PLAYERS", minplayers);
         gameValues.put("MAX_PLAYERS", maxplayers);
