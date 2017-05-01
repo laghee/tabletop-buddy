@@ -27,34 +27,30 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "IMAGE TEXT NOT NULL, "
+                    + "IMAGE TEXT, "
                     + "NAME TEXT NOT NULL, "
                     + "DESCRIPTION TEXT,"
-//                    + "THEME TEXT, "
-//                    + "YEAR_PUBLISHED TEXT, "
-//                    + "MY_RATING DOUBLE NOT NULL, "
-//                    + "BGG_RATING DOUBLE NOT NULL, "
+                    + "THEME TEXT, "
+                    + "YEAR_PUBLISHED TEXT, "
                     + "BGG_ID INTEGER NOT NULL, "
-                    + "MIN_PLAYERS STRING NOT NULL, "
-                    + "MAX_PLAYERS STRING NOT NULL, "
-                    + "PLAY_TIME STRING NOT NULL, "
-                    + "MIN_AGE STRING NOT NULL);");
+                    + "MIN_PLAYERS TEXT, "
+                    + "MAX_PLAYERS TEXT, "
+                    + "PLAY_TIME TEXT, "
+                    + "MIN_AGE TEXT);");
         }
     }
 
 
 
-    private static void insertGame(SQLiteDatabase db, String image, String name, String description, String theme, String pubdate,
-                                   Double myrating, Double bggrating, Integer bggid, String minplayers, String maxplayers,
-                                   String playtime, String age) {
+    private static void insertGame(SQLiteDatabase db, String image, String name, String description,
+                                   String theme, String pubdate, Integer bggid, String minplayers,
+                                   String maxplayers, String playtime, String age) {
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", image);
         gameValues.put("NAME", name);
         gameValues.put("DESCRIPTION", description);
         gameValues.put("THEME", theme);
         gameValues.put("YEAR_PUBLISHED", pubdate);
-//        gameValues.put("MY_RATING", myrating);
-//        gameValues.put("BGG_RATING", bggrating);
         gameValues.put("BGG_ID", bggid);
         gameValues.put("MIN_PLAYERS", minplayers);
         gameValues.put("MAX_PLAYERS", maxplayers);
