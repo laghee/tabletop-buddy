@@ -43,14 +43,14 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     }
 
     private static void insertGame(SQLiteDatabase db, String image, String name, String description,
-                                   String theme, String pubdate, Integer bggid, String minplayers,
+                                   String theme, Integer bggid, String minplayers,
                                    String maxplayers, String playtime, String age) {
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", image);
         gameValues.put("NAME", name);
         gameValues.put("DESCRIPTION", description);
         gameValues.put("THEME", theme);
-        gameValues.put("YEAR_PUBLISHED", pubdate);
+//         gameValues.put("YEAR_PUBLISHED", pubdate);
         gameValues.put("BGG_ID", bggid);
         gameValues.put("MIN_PLAYERS", minplayers);
         gameValues.put("MAX_PLAYERS", maxplayers);
