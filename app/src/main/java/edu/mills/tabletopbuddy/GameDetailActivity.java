@@ -100,7 +100,7 @@ public class GameDetailActivity extends Activity {
                 Log.d("GameDetail", "BGG detail, name: " + gameName);
                 name.setText(gameName);
 
-//                //Populate the game description
+                //Populate the game description
                 TextView description = (TextView) findViewById(R.id.description);
                 gameDescription = XmlEscape.unescapeXml(fetchedItem.getDescription());
                 gameDescription = HtmlEscape.unescapeHtml(gameDescription);
@@ -114,9 +114,9 @@ public class GameDetailActivity extends Activity {
                 theme.setText(gameThemes);
 
                 //Populate the game pub year
-//            TextView year = (TextView)findViewById(R.id.year);
-//            String year = fetchedItem.getYear();
-//            year.setText(year);
+//                TextView year = (TextView)findViewById(R.id.year);
+//                String year = fetchedItem.getYear();
+//                year.setText(year);
 
                 //Populate the game min and max players
                 TextView players = (TextView)findViewById(R.id.players);
@@ -178,8 +178,8 @@ public class GameDetailActivity extends Activity {
                     gameDescription = cursor.getString(2);
                     gameThemes = cursor.getString(3);
 //                    gamePubYr = cursor.getString(x);
-//              String bggId = cursor.getString(x);
-                    playerNum = cursor.getString(4) + " - " + cursor.getString(5);
+//                    String bggId = cursor.getString(x);
+                    playerNum = cursor.getInt(4) + " - " + cursor.getInt(5);
                     timeNum = cursor.getString(6);
                     ageNum = cursor.getString(7);
 
@@ -235,8 +235,10 @@ public class GameDetailActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        db.close();
+        if (cursor != null) {
+            cursor.close();
+            db.close();
+        }
     }
 
 
