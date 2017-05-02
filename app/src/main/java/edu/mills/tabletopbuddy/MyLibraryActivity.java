@@ -30,7 +30,10 @@ public class MyLibraryActivity extends ListActivity {
         if (getIntent().getExtras() != null) {
 //            Integer gameDeleted = (Integer) getIntent().getExtras().get(GameDetailActivity.EXTRA_GAMENO);
 //            gameCursorAdapter.changeCursor(altCursor);
-            gameCursorAdapter.notifyDataSetChanged();
+            if (gameCursorAdapter != null) {
+                gameCursorAdapter.notifyDataSetChanged();
+            }
+
         } else {
             new GameLibraryTask().execute();
             //setContentView(R.layout.activity_my_library);
@@ -78,12 +81,13 @@ public class MyLibraryActivity extends ListActivity {
     }
 }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        db.close();
+        if (cursor != null) {
+            cursor.close();
+            db.close();
+        }
     }
 
     @Override
