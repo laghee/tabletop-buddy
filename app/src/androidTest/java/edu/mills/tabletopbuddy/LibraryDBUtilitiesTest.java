@@ -1,38 +1,61 @@
 package edu.mills.tabletopbuddy;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.AndroidTestCase;
+import android.test.RenamingDelegatingContext;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import java.util.Arrays;
+import static org.junit.Assert.*;
 
-import edu.mills.tabletopbuddy.bggclient.BGG;
-import edu.mills.tabletopbuddy.bggclient.common.ThingType;
-import edu.mills.tabletopbuddy.bggclient.fetch.FetchException;
-import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
+@RunWith(AndroidJUnit4.class)
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+public class LibraryDBUtilitiesTest extends AndroidTestCase {
+    private SQLiteDatabase db;
 
-/**
- * Created by kristencutler on 5/3/2017.
- */
+    @Before
+    public void setUp() throws Exception {
+        // This creates a temporary context so database accesses in the tests are isolated.
+        RenamingDelegatingContext context =
+                new RenamingDelegatingContext(InstrumentationRegistry.getTargetContext(), "_test");
+        db = new SQLiteMyLibraryDatabaseHelper(context).getWritableDatabase();
 
-public class LibraryDBUtilitiesTest {
+        // Add Games to DB
+        long rowId = GoDatabaseUtilities.addMeeting(db, PROF1_ID, MEETING1_START);
+        GoDatabaseUtilities.endMeeting(db, rowId, MEETING1_TEXT, MEETING1_END);
+        rowId = GoDatabaseUtilities.addMeeting(db, PROF1_ID, MEETING2_START);
+        GoDatabaseUtilities.endMeeting(db, rowId, MEETING2_TEXT, MEETING2_END);
+
+        // Create one meeting with PROF2.
+        rowId = GoDatabaseUtilities.addMeeting(db, PROF2_ID);
+        GoDatabaseUtilities.endMeeting(db, rowId, null);
+    }
+
+    @After
+    public void takeDown() {
+        db.close();
+    }
+
 
     @Test
-    public void shouldFetchDieMacher() throws FetchException {
-        int dieMacherId = 1;
-
-        FetchItem item = BGG.fetch(Arrays.asList(dieMacherId), ThingType.BOARDGAME).iterator().next();
-
-        assertThat(item.getName(), containsString("Macher"));
+    public void getGame() throws Exception {
+        assertEquals(game, LibraryDBUtilities.get());
     }
 
     @Test
-    public void shouldFetchAgricolaXDeck() throws FetchException {
-        int agricolaXDeckId = 38733;
+    public void deleteGame() throws Exception {
+        assertEquals(??, LibraryDBUtilities.delete());
+    }
 
-        FetchItem item = BGG.fetch(Arrays.asList(agricolaXDeckId), ThingType.BOARDGAME_EXPANSION).iterator().next();
-
-        assertThat(item.getName(), containsString("Agricola"));
+    @Test
+    public void getGameAfterDelete() throws Exception {
+        assertEquals(game, LibraryDBUtilities.get());
     }
 }
