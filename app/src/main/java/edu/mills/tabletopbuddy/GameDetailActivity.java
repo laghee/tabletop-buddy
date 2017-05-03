@@ -100,7 +100,7 @@ public class GameDetailActivity extends Activity {
                 Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
 
                 //Populate the game name
-                TextView name = (TextView)findViewById(R.id.game_name);
+                TextView name = (TextView) findViewById(R.id.game_name);
                 gameName = fetchedItem.getName();
                 Log.d("GameDetail", "BGG detail, name: " + gameName);
                 name.setText(gameName);
@@ -124,21 +124,21 @@ public class GameDetailActivity extends Activity {
 //                year.setText(year);
 
                 //Populate the game min and max players
-                TextView players = (TextView)findViewById(R.id.players);
+                TextView players = (TextView) findViewById(R.id.players);
                 playerNum = fetchedItem.getMinPlayers().getValue() + " - " +
                         fetchedItem.getMaxPlayers().getValue() + " players";
                 Log.d("GameDetail", "BGG detail, players: " + playerNum);
                 players.setText(playerNum);
 
                 //Populate the game min and max time
-                TextView time = (TextView)findViewById(R.id.time);
+                TextView time = (TextView) findViewById(R.id.time);
                 timeNum = fetchedItem.getPlayingTime().getValue() + " mins";
                 Log.d("GameDetail", "BGG detail, time: " + timeNum);
                 time.setText(timeNum);
 
                 //Populate the game min age
-                TextView minAge = (TextView)findViewById(R.id.ages);
-                ageNum =  "ages: " + fetchedItem.getMinAge().getValue() + "+";
+                TextView minAge = (TextView) findViewById(R.id.ages);
+                ageNum = "ages: " + fetchedItem.getMinAge().getValue() + "+";
                 Log.d("GameDetail", "BGG detail, ages: " + ageNum);
                 minAge.setText(ageNum);
             } else {
@@ -211,7 +211,7 @@ public class GameDetailActivity extends Activity {
 //                year.setText(gamePubYr);
 
                 //Populate the favorite checkbox
-                CheckBox addToLibrary = (CheckBox)findViewById(R.id.addToLibrary);
+                CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
                 addToLibrary.setChecked(true);
             } else {
                 Toast toast = Toast.makeText(GameDetailActivity.this, "Database unavailable", Toast.LENGTH_SHORT);
@@ -221,11 +221,11 @@ public class GameDetailActivity extends Activity {
     }
 
     //Update the database when the checkbox is clicked
-    public void onAddToLibraryClicked(View view){
-        int gameNo = (Integer)getIntent().getExtras().get("gameNo");
+    public void onAddToLibraryClicked(View view) {
+        int gameNo = (Integer) getIntent().getExtras().get("gameNo");
 
         Log.d("GameDetail: ", "Add2LibraryClick, gameNUM: " + gameNo);
-        CheckBox addToLibrary = (CheckBox)findViewById(R.id.addToLibrary);
+        CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
 
         if (addToLibrary.isChecked()) {
             String[] playersMinMax = playerNum.split(" - ");
@@ -263,7 +263,7 @@ public class GameDetailActivity extends Activity {
                 db.close();
                 Log.d("GameDetailActivity", "Successfully wrote to db");
                 return true;
-            } catch(SQLiteException e) {
+            } catch (SQLiteException e) {
                 Log.d("GameDetailActivity", "SQLite Exception caught");
                 return false;
             }
@@ -292,7 +292,7 @@ public class GameDetailActivity extends Activity {
                 db.close();
                 Log.d("GameDetailActivity", "Successfully removed game from db");
                 return gameId;
-            } catch(SQLiteException e) {
+            } catch (SQLiteException e) {
                 Log.d("GameDetailActivity", "SQLite Exception caught while removing game from db");
                 return null;
             }
@@ -320,7 +320,7 @@ public class GameDetailActivity extends Activity {
             db.close();
         }
     }
-}
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -351,5 +351,6 @@ public class GameDetailActivity extends Activity {
         }
 
     }
+
 
 }
