@@ -30,7 +30,10 @@ public class MyLibraryActivity extends ListActivity {
         if (getIntent().getExtras() != null) {
 //            Integer gameDeleted = (Integer) getIntent().getExtras().get(GameDetailActivity.EXTRA_GAMENO);
 //            gameCursorAdapter.changeCursor(altCursor);
-            gameCursorAdapter.notifyDataSetChanged();
+            if(gameCursorAdapter!=null) {
+                gameCursorAdapter.notifyDataSetInvalidated();
+            }
+
         } else {
             new GameLibraryTask().execute();
             //setContentView(R.layout.activity_my_library);
@@ -49,9 +52,7 @@ public class MyLibraryActivity extends ListActivity {
             db = gameLibraryHelper.getReadableDatabase();
 
             try {
-                cursor = db.query("LIBRARY",
-                        new String[]{"_id", "NAME"},
-                        null, null, null, null, null);
+                cursor = db.rawQuery("SELECT * FROM LIBRARY ORDER BY NAME", null);
             } catch (SQLiteException e) {
                 return null;
             }
@@ -82,8 +83,10 @@ public class MyLibraryActivity extends ListActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        cursor.close();
-        db.close();
+        if (cursor != null) {
+            cursor.close();
+            db.close();
+        }
     }
 
     @Override
