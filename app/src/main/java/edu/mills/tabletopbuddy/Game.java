@@ -1,6 +1,5 @@
 package edu.mills.tabletopbuddy;
 
-
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
