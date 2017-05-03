@@ -11,6 +11,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -339,6 +342,37 @@ public class GameDetailActivity extends Activity {
                 startActivity(intent);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.to_search:
+                startActivity(new Intent(this, SearchResultsActivity.class));
+                return true;
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            case R.id.random:
+                startActivity(new Intent(this, RandomGameActivity.class));
+                return true;
+            case R.id.library:
+                startActivity(new Intent(this, MyLibraryActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
 }
