@@ -27,17 +27,7 @@ public class MyLibraryActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getIntent().getExtras() != null) {
-//            Integer gameDeleted = (Integer) getIntent().getExtras().get(GameDetailActivity.EXTRA_GAMENO);
-//            gameCursorAdapter.changeCursor(altCursor);
-            if (gameCursorAdapter != null) {
-                gameCursorAdapter.notifyDataSetChanged();
-            }
-
-        } else {
-            new GameLibraryTask().execute();
-            //setContentView(R.layout.activity_my_library);
-        }
+        new GameLibraryTask().execute();
     }
 
     private class GameLibraryTask extends AsyncTask<Void, Void, Cursor> {
@@ -63,23 +53,23 @@ public class MyLibraryActivity extends ListActivity {
 
         @Override
         protected void onPostExecute(Cursor cursor) {
-        super.onPostExecute(cursor);
+            super.onPostExecute(cursor);
 
-        ListView listGames = getListView();
-        if (cursor != null) {
-            gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
-                    android.R.layout.simple_list_item_1,
-                    cursor,
-                    new String[]{"NAME"},
-                    new int[]{android.R.id.text1},
-                    0);
-            listGames.setAdapter(gameCursorAdapter);
-        } else {
-            Toast toast = Toast.makeText(MyLibraryActivity.this, "Database error", Toast.LENGTH_SHORT);
-            toast.show();
+            ListView listGames = getListView();
+            if (cursor != null) {
+                gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
+                        android.R.layout.simple_list_item_1,
+                        cursor,
+                        new String[]{"NAME"},
+                        new int[]{android.R.id.text1},
+                        0);
+                listGames.setAdapter(gameCursorAdapter);
+            } else {
+                Toast toast = Toast.makeText(MyLibraryActivity.this, "Database error", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
-}
 
     @Override
     public void onDestroy() {
@@ -87,6 +77,9 @@ public class MyLibraryActivity extends ListActivity {
         if (cursor != null) {
             cursor.close();
             db.close();
+        }
+        if (gameCursorAdapter != null) {
+            gameCursorAdapter.notifyDataSetChanged();
         }
     }
 
