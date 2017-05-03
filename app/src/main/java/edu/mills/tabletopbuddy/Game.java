@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 /**
- * Game class with fields to be accessed
+ * Game class with fields to be accessed.
  */
 public class Game {
 
