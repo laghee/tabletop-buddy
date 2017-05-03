@@ -124,6 +124,18 @@ public class SearchResultsActivity extends ListActivity {
             case R.id.search:
                 onSearchRequested();
                 return true;
+            case R.id.to_search:
+                startActivity(new Intent(this, SearchResultsActivity.class));
+                return true;
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            case R.id.random:
+                startActivity(new Intent(this, RandomGameActivity.class));
+                return true;
+            case R.id.library:
+                startActivity(new Intent(this, MyLibraryActivity.class));
+                return true;
             default:
                 return false;
         }
@@ -133,6 +145,7 @@ public class SearchResultsActivity extends ListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
+
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
