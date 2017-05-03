@@ -35,9 +35,9 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
 //                    + "MY_RATING DOUBLE NOT NULL, "
 //                    + "BGG_RATING DOUBLE NOT NULL, "
                     + "BGG_ID INTEGER NOT NULL, "
-                    + "MIN_PLAYERS TEXT, "
-                    + "MAX_PLAYERS TEXT, "
-                    + "PLAY_TIME TEXT, "
+                    + "MIN_PLAYERS INTEGER, "
+                    + "MAX_PLAYERS INTEGER, "
+                    + "PLAY_TIME INTEGER, "
                     + "MIN_AGE TEXT);");
         }
     }
