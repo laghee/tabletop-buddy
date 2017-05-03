@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Game {
 
-    public static ArrayList<Integer> gamesLibrary;
+    public static ArrayList<Integer> gamesLibrary = new ArrayList<>();
 
     private String image, name, description, theme, age;
     private int minplayers, maxplayers, bggid, playtime;
@@ -28,7 +28,7 @@ public class Game {
         this.bggid = bggid;
         this.playtime = playtime;
 
-        gamesLibrary.add(this.bggid);
+        gamesLibrary.add(bggid);
     }
 
     /**
