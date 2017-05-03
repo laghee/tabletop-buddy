@@ -8,15 +8,18 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class RandomGameActivity extends Activity {
 //    String selectedMinTime;
-    String selectedMinPlayer;
-    String selectedMaxPlayer;
-    String selectedPlayTime;
+    String selectedMinPlayer ="0";
+    String selectedMaxPlayer="1000";
+    String selectedPlayTime="1000";
 //    Spinner minTimeSpinner;
     Spinner minPlayerSpinner;
     Spinner maxTimeSpinner;
@@ -54,13 +57,15 @@ public class RandomGameActivity extends Activity {
         protected Cursor doInBackground(Void... values) {
             SQLiteOpenHelper SQLiteMyLibraryDatabaseHelper =
                     new SQLiteMyLibraryDatabaseHelper(RandomGameActivity.this);
-            String[] selectArgs = new String[]{selectedPlayTime, selectedMinPlayer, selectedMaxPlayer};
+//            String[] selectArgs = new String[]{selectedPlayTime, selectedMinPlayer, selectedMaxPlayer};
+            String[] selectArgs = new String[]{selectedMinPlayer, selectedMaxPlayer};
 
             try {
                 db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
 //                cursor = db.query("LIBRARY", new String[]{"_id", "MIN_AGE"},
 //                        "MIN_AGE ==" +selectedMinAge,null, null, null, null, null);
-                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE PLAY_TIME<=? AND MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
+//                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE PLAY_TIME<=? AND MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
+                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
                 return cursor;
             } catch (SQLiteException e) {
                 return null;
@@ -70,7 +75,7 @@ public class RandomGameActivity extends Activity {
         @Override
         protected void onPostExecute(Cursor cursor) {
             if (cursor.moveToFirst()) {
-                int max = cursor.getCount() - 1;
+                int max = cursor.getCount() ;
                 //int position = (0 + max)/2 ;
 
                 int position = (int) (Math.random() * max);
@@ -89,6 +94,36 @@ public class RandomGameActivity extends Activity {
 
         }
 
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.to_search:
+                startActivity(new Intent(this, SearchResultsActivity.class));
+                return true;
+            case R.id.main:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            case R.id.random:
+                startActivity(new Intent(this, RandomGameActivity.class));
+                return true;
+            case R.id.library:
+                startActivity(new Intent(this, MyLibraryActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 

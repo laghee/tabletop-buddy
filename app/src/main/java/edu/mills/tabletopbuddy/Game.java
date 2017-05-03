@@ -2,78 +2,31 @@ package edu.mills.tabletopbuddy;
 
 
 import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
 
 //Game class with fields, getters and setters.
 public class Game {
 
-    private String image, name, description, theme;
-    private Integer pubdate, minplayers, maxplayers, mintime,
-    maxtime, age, FAVE_INT;
-    private Double myrating;
-    private Double bggrating;
-    SQLiteDatabase db;
+    public static ArrayList<Integer> gamesLibrary = new ArrayList<>();
 
-public Game(String image, String name, String description, String theme,
-            Integer pubdate, Integer minplayers, Integer maxplayers,
-            Integer mintime, Integer maxtime, Integer age, Integer FAVE_INT,
-            Double myrating, Double bggrating) {
-    this.image = image;
-    this.name = name;
-    this.description = description;
-    this.theme = theme;
-    this.pubdate = pubdate;
-    this.minplayers = minplayers;
-    this.maxplayers = maxplayers;
-    this.mintime = mintime;
-    this.maxtime = maxtime;
-    this.age = age;
-    this.FAVE_INT = FAVE_INT;
-    this.myrating = myrating;
-    this.bggrating = bggrating;
-}
+    private String image, name, description, theme, age;
+    private int minplayers, maxplayers, bggid, playtime;
+    private SQLiteDatabase db;
 
-    public Double getBbgrating() {
-        return bggrating;
-    }
+    public Game(String image, String name, String description, String theme, String age,
+                int minplayers, int maxplayers,
+                int bggid, int playtime) {
+        this.image = image;
+        this.name = name;
+        this.description = description;
+        this.theme = theme;
+        this.minplayers = minplayers;
+        this.maxplayers = maxplayers;
+        this.age = age;
+        this.bggid = bggid;
+        this.playtime = playtime;
 
-    public Double getMyrating() {
-        return myrating;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public Integer getFAVE_INT() {
-        return FAVE_INT;
-    }
-
-    public Integer getMaxplayers() {
-        return maxplayers;
-    }
-
-    public Integer getMinplayers() {
-        return minplayers;
-    }
-
-    public Integer getMaxtime() {
-        return maxtime;
-    }
-
-    public Integer getMintime() {
-        return mintime;
-    }
-
-    public Integer getPubdate() {
-        return pubdate;
-    }
-
-    public SQLiteDatabase getDb() {
-        return db;
-    }
-
-    public String getDescription() {
-        return description;
+        gamesLibrary.add(bggid);
     }
 
     public String getImage() {
@@ -84,64 +37,76 @@ public Game(String image, String name, String description, String theme,
         return name;
     }
 
+    public String getAge() {
+        return age;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public String getTheme() {
         return theme;
     }
 
-    public void setAge(Integer age) {
+    public int getBggId() {
+        return bggid;
+    }
+
+    public int getMaxplayers() {
+        return maxplayers;
+    }
+
+    public int getMinplayers() {
+        return minplayers;
+    }
+
+    public int getPlaytime() {
+        return playtime;
+    }
+
+    public SQLiteDatabase getDb() {
+        return db;
+    }
+
+    public void setAge(String age) {
         this.age = age;
-    }
-
-    public void setBbgrating(Double bbgrating) {
-        this.bggrating = bbgrating;
-    }
-
-    public void setDb(SQLiteDatabase db) {
-        this.db = db;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setFAVE_INT(Integer FAVE_INT) {
-        this.FAVE_INT = FAVE_INT;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setMaxplayers(Integer maxplayers) {
-        this.maxplayers = maxplayers;
-    }
-
-    public void setMaxtime(Integer maxtime) {
-        this.maxtime = maxtime;
-    }
-
-    public void setMinplayers(Integer minplayers) {
-        this.minplayers = minplayers;
-    }
-
-    public void setMintime(Integer mintime) {
-        this.mintime = mintime;
-    }
-
-    public void setMyrating(Double myrating) {
-        this.myrating = myrating;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPubdate(Integer pubdate) {
-        this.pubdate = pubdate;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    public void setDb(SQLiteDatabase db) {
+        this.db = db;
+    }
+
+    public void setBggid(int bggid) {
+        this.bggid = bggid;
+    }
+
+    public void setMinplayers(int minplayers) {
+        this.minplayers = minplayers;
+    }
+
+    public void setMaxplayers(int maxplayers) {
+        this.maxplayers = maxplayers;
+    }
+
+    public void setPlaytime(int playTime) {
+        this.playtime = playTime;
     }
 
     @Override

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/search"
-        android:title="@string/menu_search"
-        android:icon="@drawable/ic_search_black_48dp"
-        android:showAsAction="ifRoom|collapseActionView"
-        android:iconifiedByDefault="false"
-        android:actionViewClass="android.widget.SearchView"/>
     <item android:id="@+id/main"
         android:title="@string/menu_main"
         android:icon="@drawable/star"
@@ -22,4 +16,5 @@
         android:title="@string/menu_random"
         android:icon="@drawable/dice2_small"
         android:showAsAction="never" />
+
 </menu>
