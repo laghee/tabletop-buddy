@@ -8,8 +8,9 @@
     android:layout_gravity="center"
     tools:context="edu.mills.tabletopbuddy.GameDetailActivity">
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:layout_gravity="center"
         android:scrollbars="vertical"
         android:fadeScrollbars="false"
         android:fillViewport="true">
@@ -17,7 +18,7 @@
             android:src="@drawable/star"
             android:scaleType="fitXY"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             />
     </ScrollView>
     <TextView android:id="@+id/game_name"
@@ -25,7 +26,7 @@
         android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-                <!--android:text="Evil Fairy"-->
+    <!--android:text="Evil Fairy"-->
     <LinearLayout
         android:gravity="center"
         android:layout_width="wrap_content"
@@ -35,13 +36,8 @@
             <!--android:gravity="center"-->
             <!--android:layout_width="50dp"-->
             <!--android:layout_height="50dp" />-->
-            <!--android:text="5.5"-->
-        <CheckBox android:id="@+id/addToLibrary"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/addGame"
-            android:onClick="onAddToLibraryClicked"/>
+        <!--android:text="5.5"-->
+
         <TextView android:id="@+id/theme"
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
@@ -54,31 +50,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView android:id="@+id/ages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@drawable/circle_text"
             android:gravity="center"
-            android:layout_margin="10dp"
-            android:textSize="12sp" />
-            <!--android:text="ages 4-6"-->
+
+            android:layout_margin="20dp"
+            android:textSize="20sp" />
+        <!--android:text="ages 4-6"-->
 
         <TextView android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@drawable/circle_text"
             android:gravity="center"
-            android:layout_margin="10dp"
-            android:textSize="12sp" />
-            <!--android:text="45-60 min"-->
+
+            android:layout_margin="20dp"
+            android:textSize="20sp" />
+        <!--android:text="45-60 min"-->
 
         <TextView android:id="@+id/players"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@drawable/circle_text"
             android:gravity="center"
-            android:layout_margin="10dp"
-            android:textSize="12sp" />
-            <!--android:text="2-4 players"-->
+
+            android:layout_margin="20dp"
+            android:textSize="20sp" />
+        <CheckBox android:id="@+id/addToLibrary"
+            android:layout_marginStart="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="20sp"
+            android:text="@string/addGame"
+            android:onClick="onAddToLibraryClicked"/>
     </LinearLayout>
     <ScrollView
         android:id="@+id/description_scroll"
