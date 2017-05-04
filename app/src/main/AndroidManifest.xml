@@ -17,9 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MyLibraryActivity" android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity android:name=".GameDetailActivity" />
         <activity android:name=".RandomGameActivity" />
-        <activity android:name=".MyLibraryActivity" />
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/app_label"

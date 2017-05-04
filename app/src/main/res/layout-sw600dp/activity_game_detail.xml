@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     tools:context="edu.mills.tabletopbuddy.GameDetailActivity">
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="350dp"
         android:layout_gravity="center"
         android:scrollbars="vertical"
@@ -16,8 +16,8 @@
         android:fillViewport="true">
         <ImageView android:id="@+id/photo"
             android:src="@drawable/star"
-            android:scaleType="fitXY"
-            android:layout_width="wrap_content"
+            android:scaleType="fitStart"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />
     </ScrollView>
