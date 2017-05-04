@@ -9,7 +9,6 @@ public class LibraryDBUtilities {
 
     private LibraryDBUtilities() {}
 
-
     static Game getGame(SQLiteDatabase db, int gameId) {
         Cursor cursor = db.query(SQLiteMyLibraryDatabaseHelper.LIBRARY_TABLE,
                 new String[]{"IMAGE", "NAME", "DESCRIPTION", "THEME", "BGG_ID", "MIN_PLAYERS",
