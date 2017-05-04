@@ -138,7 +138,7 @@ public class GameDetailActivity extends Activity {
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
-                ageNum = "ages: " + fetchedItem.getMinAge().getValue() + "+";
+                ageNum = "ages: " + fetchedItem.getMinAge().getValue();
                 Log.d("GameDetail", "BGG detail, ages: " + ageNum);
                 minAge.setText(ageNum);
             } else {
@@ -189,7 +189,7 @@ public class GameDetailActivity extends Activity {
                 //Populate the game themes
                 TextView theme = (TextView) findViewById(R.id.theme);
                 Log.d("GameDetail", "Library detail, Themes: " + game.getTheme());
-                theme.setText("Categories: " + game.getTheme());
+                theme.setText(game.getTheme());
 
                 //Populate the game min and max players
                 TextView players = (TextView) findViewById(R.id.players);
@@ -199,12 +199,12 @@ public class GameDetailActivity extends Activity {
                 //Populate the game min and max time
                 TextView time = (TextView) findViewById(R.id.time);
                 Log.d("GameDetail", "Library detail, Time: " + game.getPlaytime());
-                time.setText("Mins: " + game.getPlaytime());
+                time.setText(game.getPlaytime() + " mins");
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
                 Log.d("GameDetail", "Library detail, Ages: " + game.getAge());
-                minAge.setText("Ages: " + game.getAge().toString() + "+");
+                minAge.setText(game.getAge());
 
                 //Populate the game pub year
 //                TextView year = (TextView)findViewById(R.id.year);
@@ -236,8 +236,8 @@ public class GameDetailActivity extends Activity {
             int maxPlayers = Integer.valueOf(maxplayers.substring(0, maxplayers.length() - 8));
             int time = Integer.valueOf(timeNum.substring(0, timeNum.length() - 5));
 
-            Game game = new Game(gameImageUrl, gameName, gameDescription, gameThemes, ageNum,
-                    minPlayers, maxPlayers, time, gameNo);
+            Game game = new Game(gameImageUrl, gameName, gameDescription, gameThemes, gameNo,
+                    minPlayers, maxPlayers, time, ageNum);
             new AddGameToLibraryTask().execute(game);
         } else {
             ContentValues gameNum = new ContentValues();
