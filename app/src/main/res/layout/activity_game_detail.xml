@@ -15,10 +15,9 @@
         android:fillViewport="true">
         <ImageView android:id="@+id/photo"
             android:src="@drawable/star"
-            android:scaleType="fitXY"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            />
+            android:scaleType="fitStart"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp" />
     </ScrollView>
     <TextView android:id="@+id/game_name"
         android:textSize="22sp"
