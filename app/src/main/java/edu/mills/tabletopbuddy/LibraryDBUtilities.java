@@ -12,16 +12,16 @@ public class LibraryDBUtilities {
 
     static Game getGame(SQLiteDatabase db, int gameId) {
         Cursor cursor = db.query(SQLiteMyLibraryDatabaseHelper.LIBRARY_TABLE,
-                new String[]{"IMAGE", "NAME", "DESCRIPTION", "THEME", "MIN_AGE", "MIN_PLAYERS",
-                        "MAX_PLAYERS", "BGG_ID", "PLAY_TIME", }, "_id = ?",
+                new String[]{"IMAGE", "NAME", "DESCRIPTION", "THEME", "BGG_ID", "MIN_PLAYERS",
+                        "MAX_PLAYERS", "PLAY_TIME", "MIN_AGE"}, "_id = ?",
                 new String[]{Integer.toString(gameId)},
                 null, null, null);
 
         Game game = null;
         if (cursor.moveToFirst()) {
             game = new Game(cursor.getString(0), cursor.getString(1), cursor.getString(2),
-                    cursor.getString(3), cursor.getString(4), cursor.getInt(5),
-                    cursor.getInt(6), cursor.getInt(7), cursor.getInt(8));
+                    cursor.getString(3), cursor.getInt(4), cursor.getInt(5),
+                    cursor.getInt(6), cursor.getInt(7), cursor.getString(8));
         }
         return game;
     }
