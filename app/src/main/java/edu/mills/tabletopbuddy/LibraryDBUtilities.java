@@ -5,13 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+
 public class LibraryDBUtilities {
 
     private LibraryDBUtilities() {}
 
 
     static Game getGame(SQLiteDatabase db, int gameId) {
-        Cursor cursor = db.query(SQLiteMyLibraryDatabaseHelper.LIBRARY_TABLE,
+        //change from SQLiteMyLibraryDatabaseHelper.LIBRARY_TABLE
+        Cursor cursor = db.query("LIBRARY",
                 new String[]{"IMAGE", "NAME", "DESCRIPTION", "THEME", "MIN_AGE", "MIN_PLAYERS",
                         "MAX_PLAYERS", "BGG_ID", "PLAY_TIME", }, "_id = ?",
                 new String[]{Integer.toString(gameId)},
@@ -25,7 +27,8 @@ public class LibraryDBUtilities {
         }
         return game;
     }
-    public static boolean insertGame(SQLiteDatabase db, Game game) {
+
+    public static long insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
         gameValues.put("IMAGE", game.getImage());
         gameValues.put("NAME", game.getName());
@@ -38,9 +41,10 @@ public class LibraryDBUtilities {
         gameValues.put("MIN_AGE", game.getAge());
 //        gameValues.put("YEAR_PUBLISHED", pubdate);
 
-        db.insert("LIBRARY", null, gameValues);
+        //db.insert("LIBRARY", null, gameValues);
         Log.d("DatabaseUtils", "Successfully wrote" + game.getName() + "to db");
-        return true;
+        //long rowId = db.getLong(0);
+        return db.insert("LIBRARY", null, gameValues);
     }
 
     public static void removeGame(SQLiteDatabase db, Integer libraryId) {
