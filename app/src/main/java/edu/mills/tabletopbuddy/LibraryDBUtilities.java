@@ -73,16 +73,19 @@ public class LibraryDBUtilities {
      * Removes a game from the local database.
      *
      * @param db the local database
-     * @param libraryId the id in the library
+     * @param bggId the id from BGG
      */
-    public static void removeGame(SQLiteDatabase db, Integer libraryId) {
-        db.delete("LIBRARY", "_id = ?", new String[] {libraryId.toString()});
-    }
-
     public static void removeGameByBGGId(SQLiteDatabase db, Integer bggId) {
         db.delete(LIBRARY_TABLE, BGGID_COL + " = ?", new String[] {bggId.toString()});
     }
 
+     /**
+     * Checks for a game in the local database and, if it exists, retrieves its local id number.
+     *
+     * @param db the local database
+     * @param bggId the id from BGG
+     * @return libraryId the library id
+     */
     public static int getLibraryIdIfExists(SQLiteDatabase db, int bggId) {
 
         int libraryId = -1;
