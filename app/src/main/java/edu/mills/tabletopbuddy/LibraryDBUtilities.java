@@ -10,6 +10,7 @@ package edu.mills.tabletopbuddy;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.*;
 
