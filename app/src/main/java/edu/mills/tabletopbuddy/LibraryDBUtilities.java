@@ -62,23 +62,21 @@ public class LibraryDBUtilities {
         return true;
     }
     /**
-     * Removes a game from the local database.
+     * Removes a game from the local database by the id of the row.
      *
      * @param db the local database
      * @param libraryId the id in the library
      */
     public static void removeGameByLibraryId(SQLiteDatabase db, Integer libraryId) {
-        db.delete(LIBRARY_TABLE, "_id = ?", new String[] {libraryId.toString()});
-    /**
-     * Removes a game from the local database.
-     *
-     * @param db the local database
-     * @param libraryId the id in the library
-     */
-    public static void removeGame(SQLiteDatabase db, Integer libraryId) {
-        db.delete("LIBRARY", "_id = ?", new String[] {libraryId.toString()});
+        db.delete(LIBRARY_TABLE, "_id = ?", new String[]{libraryId.toString()});
     }
 
+    /**
+     * Removes a game from the local database based on bgg id.
+     *
+     * @param db the local database
+     * @param bggId the bgg id
+     */
     public static void removeGameByBGGId(SQLiteDatabase db, Integer bggId) {
         db.delete(LIBRARY_TABLE, BGGID_COL + " = ?", new String[] {bggId.toString()});
     }
