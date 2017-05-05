@@ -18,8 +18,6 @@ public class Game {
     private int minplayers, maxplayers, bggid, playtime;
     private SQLiteDatabase db;
 
-    public Game(String image, String name, String description, String theme, int bggid,
-                int minplayers, int maxplayers, int playtime, String age) {
     /**
      * Constructs a board game.
      *
@@ -33,18 +31,17 @@ public class Game {
      * @param bggid the bggid
      * @param playtime the max playtime
      */
-    public Game(String image, String name, String description, String theme, String age,
-                int minplayers, int maxplayers,
-                int bggid, int playtime) {
+    public Game(String image, String name, String description, String theme, int bggid,
+                int minplayers, int maxplayers, int playtime, String age) {
         this.image = image;
         this.name = name;
         this.description = description;
         this.theme = theme;
+        this.bggid = bggid;
         this.minplayers = minplayers;
         this.maxplayers = maxplayers;
-        this.age = age;
-        this.bggid = bggid;
         this.playtime = playtime;
+        this.age = age;
 
     }
 

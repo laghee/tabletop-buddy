@@ -68,7 +68,9 @@ public class LibraryDBUtilities {
      * @param libraryId the id in the library
      */
     public static void removeGameByLibraryId(SQLiteDatabase db, Integer libraryId) {
-        db.delete(LIBRARY_TABLE, "_id = ?", new String[] {libraryId.toString()});
+        db.delete(LIBRARY_TABLE, "_id = ?", new String[]{libraryId.toString()});
+    }
+    
     /**
      * Removes a game from the local database.
      *
