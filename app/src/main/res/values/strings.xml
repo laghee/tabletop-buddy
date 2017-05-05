@@ -15,6 +15,7 @@
     <string name="menu_random">Go to Random Game Generator</string>
     <string name="menu_library">See My Library</string>
     <string name="detail_menu_search">Search for a game</string>
+    <string name="gamePhoto">Picture of Game</string>
 
     <string-array name="players">
         <item>0</item>
@@ -28,17 +29,7 @@
         <item>8</item>
         <item>9</item>
     </string-array>
-    <string-array name="ages">
-        <item></item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-    </string-array>
+
     <string-array name="times">
         <item>0</item>
         <item>15</item>
@@ -73,21 +64,7 @@
         <item>30</item>
         <item>15</item>
     </string-array>
-    <string-array name="categories">
-        <item></item>
-        <item>Adventure</item>
-        <item>Dice</item>
-        <item>Mafia</item>
-        <item>Medieval</item>
-        <item>Pirates</item>
-        <item>Science</item>
-        <item>War</item>
-        <item>Economic</item>
-        <item>Farming</item>
-        <item>Maze</item>
-        <item>Zombies</item>
-        <item>Travel</item>
-    </string-array>
+
     <string name="spinner_category">Category: </string>
     <string name="spinner_ages">Min Age: </string>
     <string name="spinner_players">Min Players: </string>

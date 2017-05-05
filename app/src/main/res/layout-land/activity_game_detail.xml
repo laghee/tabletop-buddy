@@ -44,6 +44,7 @@
                 <ImageView android:id="@+id/photo"
                     android:src="@drawable/star"
                     android:scaleType="fitStart"
+                    android:contentDescription="@string/gamePhoto"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     />
