@@ -110,7 +110,7 @@ public class Game {
 
     /**
      * Gets the suggested minimum age of players.
-     * @return age
+     * @return age the minimum age of players.
      */
     public String getAge() {
         return age;
