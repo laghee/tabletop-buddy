@@ -44,7 +44,7 @@ import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 /**
  * The game's details are displayed, enabling a user to view it's properties.
  * A user can add to or remove a game from their local library. If a user removes a game,
- * they are taken back to their library and {@link MyLibraryActivity is launched}.
+ * they are taken back to their library and {@link MyLibraryActivity} is launched.
  */
 public class GameDetailActivity extends Activity {
     private boolean bgg = true;
