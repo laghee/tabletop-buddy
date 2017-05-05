@@ -4,16 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.BGGID_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.DESC_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.IMAGE_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.LIBRARY_TABLE;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.MAXPLAYERS_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.MINAGE_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.MINPLAYERS_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.NAME_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.PLAYTIME_COL;
-import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.THEME_COL;
+import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.*;
 
 public class LibraryDBUtilities {
 
