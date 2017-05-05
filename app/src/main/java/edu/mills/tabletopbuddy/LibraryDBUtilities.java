@@ -49,8 +49,7 @@ public class LibraryDBUtilities {
      *
      * @param db the SQLite database
      * @param game the game
-     * @return true when the game is successfully inserted into the
-     * local database.
+     * @return row id of game
      */
     public static long insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
