@@ -33,8 +33,12 @@ import android.widget.Toast;
 public class MyLibraryActivity extends ListActivity {
     private SQLiteDatabase db;
     private Cursor cursor;
-    private Cursor altCursor;
     private CursorAdapter gameCursorAdapter;
+
+    private static final String ERROR_FROM_DATABASE = "Error from database.";
+    private static final String LIBRARY_ACTIVITY = "MyLibraryActivity";
+    private static final String RAW_QUERY_BY_NAME = "SELECT * FROM LIBRARY ORDER BY NAME";
+    private static final String NAME_COL = "NAME";
 
     //view saved games
     @Override
@@ -55,7 +59,7 @@ public class MyLibraryActivity extends ListActivity {
             db = gameLibraryHelper.getReadableDatabase();
 
             try {
-                cursor = db.rawQuery("SELECT * FROM LIBRARY ORDER BY NAME", null);
+                cursor = db.rawQuery(RAW_QUERY_BY_NAME, null);
             } catch (SQLiteException e) {
                 return null;
             }
@@ -71,12 +75,12 @@ public class MyLibraryActivity extends ListActivity {
                 gameCursorAdapter = new SimpleCursorAdapter(MyLibraryActivity.this,
                         android.R.layout.simple_list_item_1,
                         cursor,
-                        new String[]{"NAME"},
+                        new String[]{NAME_COL},
                         new int[]{android.R.id.text1},
                         0);
                 listGames.setAdapter(gameCursorAdapter);
             } else {
-                Toast toast = Toast.makeText(MyLibraryActivity.this, "Database error", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(MyLibraryActivity.this, ERROR_FROM_DATABASE, Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
@@ -95,13 +99,11 @@ public class MyLibraryActivity extends ListActivity {
         if (gameCursorAdapter != null) {
             gameCursorAdapter.notifyDataSetChanged();
         }
-
         super.onDestroy();
         if (cursor != null) {
             cursor.close();
             db.close();
         }
-
     }
 
     @Override
@@ -111,9 +113,10 @@ public class MyLibraryActivity extends ListActivity {
                                 long id) {
         Intent intent = new Intent(MyLibraryActivity.this, GameDetailActivity.class);
         intent.putExtra(GameDetailActivity.EXTRA_GAMENO, (int) id);
-        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, "MyLibraryActivity");
+        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, LIBRARY_ACTIVITY);
         startActivity(intent);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -141,8 +144,5 @@ public class MyLibraryActivity extends ListActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
-
-
 }

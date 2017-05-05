@@ -19,16 +19,54 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "mylibrarydatabase"; // the name of our database
     private static final int DB_VERSION = 1; // the version of the database
 
-    // package-private table and column names
+    /**
+     * Name of database table keeping track of all saved games in personal library.
+     */
     static final String LIBRARY_TABLE = "LIBRARY";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with image URL.
+     */
     static final String IMAGE_COL = "IMAGE";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with title of game.
+     */
     static final String NAME_COL = "NAME";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game description.
+     */
     static final String DESC_COL = "DESCRIPTION";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game themes/categories.
+     */
     static final String THEME_COL = "THEME";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with unique id from BGG API.
+     */
     static final String BGGID_COL = "BGG_ID";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game's suggested minimum players.
+     */
     static final String MINPLAYERS_COL = "MIN_PLAYERS";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game's suggested maximum players.
+     */
     static final String MAXPLAYERS_COL = "MAX_PLAYERS";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game's suggested play time.
+     */
     static final String PLAYTIME_COL = "PLAY_TIME";
+
+    /**
+     * Name of column in {@link #LIBRARY_TABLE} with game's suggested minimum age of players.
+     */
     static final String MINAGE_COL = "MIN_AGE";
 
     SQLiteMyLibraryDatabaseHelper(Context context) {
@@ -52,9 +90,6 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
                     + NAME_COL + " TEXT NOT NULL, "
                     + DESC_COL + " TEXT,"
                     + THEME_COL + " TEXT, "
-//                    + "YEAR_PUBLISHED TEXT, "
-//                    + "MY_RATING DOUBLE NOT NULL, "
-//                    + "BGG_RATING DOUBLE NOT NULL, "
                     + BGGID_COL + " INTEGER NOT NULL, "
                     + MINPLAYERS_COL + " INTEGER, "
                     + MAXPLAYERS_COL + " INTEGER, "

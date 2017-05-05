@@ -25,11 +25,11 @@ public class Game {
      * @param name the game name
      * @param description the game description
      * @param theme the game theme
-     * @param age the game's suggested age group
+     * @param bggid the bggid
      * @param minplayers the minimum players
      * @param maxplayers the maximum players
-     * @param bggid the bggid
      * @param playtime the max playtime
+     * @param age the game's suggested age group
      */
     public Game(String image, String name, String description, String theme, int bggid,
                 int minplayers, int maxplayers, int playtime, String age) {
@@ -58,14 +58,6 @@ public class Game {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Gets the suggested minimum age of players.
-     * @return age
-     */
-    public String getAge() {
-        return age;
     }
 
     /**
@@ -114,6 +106,14 @@ public class Game {
      */
     public int getPlaytime() {
         return playtime;
+    }
+
+    /**
+     * Gets the suggested minimum age of players.
+     * @return age
+     */
+    public String getAge() {
+        return age;
     }
 
     /**
@@ -203,7 +203,6 @@ public class Game {
     public void setPlaytime(int playtime) {
         this.playtime = playtime;
     }
-
 
     @Override
     public boolean equals(Object obj) {

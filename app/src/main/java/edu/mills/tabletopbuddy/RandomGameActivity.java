@@ -28,17 +28,18 @@ import android.widget.Toast;
  * will appear when {@link GameDetailActivity} is launched.
  */
 public class RandomGameActivity extends Activity {
-//    String selectedMinTime;
-    String selectedMinPlayer ="0";
-    String selectedMaxPlayer="1000";
-    String selectedPlayTime="1000";
-//    Spinner minTimeSpinner;
-    Spinner minPlayerSpinner;
-    Spinner maxTimeSpinner;
-    Spinner maxPlayerSpinner;
-    SQLiteDatabase db;
-    Cursor cursor;
-    Integer gamenumber;
+    private String selectedMinPlayer ="0";
+    private String selectedMaxPlayer="1000";
+    private String selectedPlayTime="1000";
+    private Spinner minPlayerSpinner;
+    private Spinner maxTimeSpinner;
+    private Spinner maxPlayerSpinner;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    private Integer gamenumber;
+
+    private static final String NO_GAME = "Sorry, no games match your criteria :(";
+    private static final String RANDOM_ACTIVITY = "RandomGameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,9 @@ public class RandomGameActivity extends Activity {
         selectedPlayTime = String.valueOf(maxTimeSpinner.getSelectedItem());
         minPlayerSpinner = (Spinner) findViewById(R.id.min_player_spinner);
         selectedMinPlayer =String.valueOf(minPlayerSpinner.getSelectedItem());
-//        maxTimeSpinner = (Spinner) findViewById(R.id.max_time_spinner);
-//        selectedMaxTime = String.valueOf(maxTimeSpinner.getSelectedItem());
         maxPlayerSpinner = (Spinner) findViewById(R.id.max_players_spinner);
         selectedMaxPlayer =String.valueOf(maxPlayerSpinner.getSelectedItem());
-//        resultToast = category + selectedMinPlayer + selectedMinTime + selectedMinAge;
-//        Toast toast = Toast.makeText(this, resultToast, Toast.LENGTH_LONG);
-//        toast.setGravity(Gravity.TOP| Gravity.START, 0, 500);
-//        toast.show();
+
         new RetrieveGamesTask().execute();
     }
 
@@ -74,14 +70,11 @@ public class RandomGameActivity extends Activity {
         protected Cursor doInBackground(Void... values) {
             SQLiteOpenHelper SQLiteMyLibraryDatabaseHelper =
                     new SQLiteMyLibraryDatabaseHelper(RandomGameActivity.this);
-//            String[] selectArgs = new String[]{selectedPlayTime, selectedMinPlayer, selectedMaxPlayer};
             String[] selectArgs = new String[]{selectedMinPlayer, selectedMaxPlayer};
 
             try {
                 db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
-//                cursor = db.query("LIBRARY", new String[]{"_id", "MIN_AGE"},
-//                        "MIN_AGE ==" +selectedMinAge,null, null, null, null, null);
-//                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE PLAY_TIME<=? AND MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
+
                 cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
                 return cursor;
             } catch (SQLiteException e) {
@@ -93,38 +86,32 @@ public class RandomGameActivity extends Activity {
         protected void onPostExecute(Cursor cursor) {
             if (cursor.moveToFirst()) {
                 int max = cursor.getCount() ;
-                //int position = (0 + max)/2 ;
 
                 int position = (int) (Math.random() * max);
                 cursor.moveToPosition(position);
                 gamenumber = cursor.getInt(0);
                 Intent intent = new Intent(RandomGameActivity.this, GameDetailActivity.class);
                 intent.putExtra(GameDetailActivity.EXTRA_GAMENO, gamenumber);
-                intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, "RandomGameActivity");
+                intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, RANDOM_ACTIVITY);
                 startActivity(intent);
             } else{
-                Toast toast = Toast.makeText(RandomGameActivity.this, "sorry, no games match your criteria :(", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(RandomGameActivity.this, NO_GAME, Toast.LENGTH_SHORT);
                 toast.show();
             }
             db.close();
             cursor.close();
-
         }
-
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.navigation_menu, menu);
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.to_search:
                 startActivity(new Intent(this, SearchResultsActivity.class));
@@ -141,21 +128,6 @@ public class RandomGameActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
-
-//    //Generates a random number to query the database
-//    public int generateRandomNumber(int max) {
-//
-//        //if the game is selected within personal collection
-////        if (collection) {
-////            //personal collection size
-////            max = 100;
-////        }
-////        else {
-////            max = 3333;
-////        }
-//        return (int)(Math.random() * max);
-//    }
 }
 
