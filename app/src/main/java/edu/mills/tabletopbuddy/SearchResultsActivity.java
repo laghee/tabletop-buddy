@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.ListActivity;
@@ -26,6 +33,11 @@ import edu.mills.tabletopbuddy.bggclient.search.SearchException;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchItem;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchOutput;
 
+/**
+ * Performs a query to the BGG server database by name using BGG client API.
+ * Returns search results in a list, enabling a user to view the game's details
+ * once {@link GameDetailActivity} is launched.
+ */
 public class SearchResultsActivity extends ListActivity {
     private List<SearchItem> results;
 

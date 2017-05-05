@@ -1,4 +1,10 @@
-
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.Activity;
@@ -36,6 +42,11 @@ import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
 import static android.text.TextUtils.join;
 import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 
+/**
+ * The game's details are displayed, enabling a user to view it's properties.
+ * A user can add to or remove a game from their local library. If a user removes a game,
+ * they are taken back to their library and {@link MyLibraryActivity is launched}.
+ */
 public class GameDetailActivity extends Activity {
     public static final String EXTRA_GAMENO = "gameNo";
     public static final String EXTRA_CLASSNAME = "class";

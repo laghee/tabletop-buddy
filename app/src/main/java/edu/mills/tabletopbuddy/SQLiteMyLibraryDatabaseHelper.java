@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.content.ContentValues;
@@ -5,6 +12,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * A local SQLite database for inserting into and deleting games from a user's local library.
+ */
 public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "mylibrarydatabase"; // the name of our database

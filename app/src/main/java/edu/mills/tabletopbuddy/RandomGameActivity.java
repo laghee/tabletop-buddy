@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.Activity;
@@ -15,6 +22,11 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+/**
+ * Enables a user to randomly select a game from their local library, by choosing constraints.
+ * A random game will be selected matching the constraints. After submission, the game's details
+ * will appear when {@link GameDetailActivity} is launched.
+ */
 public class RandomGameActivity extends Activity {
 //    String selectedMinTime;
     String selectedMinPlayer ="0";
@@ -34,6 +46,11 @@ public class RandomGameActivity extends Activity {
         setContentView(R.layout.activity_random_game);
     }
 
+    /**
+     * Users submit their specific constraints, triggering the retrieval of a game.
+     *
+     * @param view the view
+     */
     public void onSubmit(View view){
         maxTimeSpinner = (Spinner) findViewById(R.id.max_time_spinner);
         selectedPlayTime = String.valueOf(maxTimeSpinner.getSelectedItem());
