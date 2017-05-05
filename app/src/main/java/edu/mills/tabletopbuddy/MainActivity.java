@@ -1,4 +1,4 @@
-/**
+/*
  * Implementation of the Tabletop Buddy application. Created for Mills
  * CS 115: Mobile Application Development, Spring 2017.
  *
