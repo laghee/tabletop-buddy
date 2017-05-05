@@ -55,7 +55,6 @@ public class GameDetailActivity extends Activity {
     private String gameName;
     private String gameDescription;
     private String gameThemes;
-    //    private String gamePubYr;
     private String playerNum;
     private String timeNum;
     private String ageNum;
@@ -64,6 +63,10 @@ public class GameDetailActivity extends Activity {
     private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
     private static final String LIBRARY_ACTIVITY = "MyLibraryActivity";
     private static final String RANDOM_ACTIVITY = "RandomGameActivity";
+    private static final String PLAYERS = " players";
+    private static final String MINS = " mins";
+    private static final String AGES = "Ages: ";
+    private static final String ERROR_RETRIEVE_GAME = "Error retrieving game.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,21 +174,21 @@ public class GameDetailActivity extends Activity {
                 //Populate the game min and max players
                 TextView players = (TextView) findViewById(R.id.players);
                 playerNum = fetchedItem.getMinPlayers().getValue() + " - " +
-                        fetchedItem.getMaxPlayers().getValue() + " players";
+                        fetchedItem.getMaxPlayers().getValue() + PLAYERS;
                 players.setText(playerNum);
 
                 //Populate the game min and max time
                 TextView time = (TextView) findViewById(R.id.time);
-                timeNum = fetchedItem.getPlayingTime().getValue() + " mins";
+                timeNum = fetchedItem.getPlayingTime().getValue() + MINS;
                 time.setText(timeNum);
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
-                ageNum = "Ages: " + fetchedItem.getMinAge().getValue();
+                ageNum = AGES + fetchedItem.getMinAge().getValue();
                 minAge.setText(ageNum);
             } else {
                 Toast toast = Toast.makeText(GameDetailActivity.this,
-                        "Error retrieving game", Toast.LENGTH_SHORT);
+                        ERROR_RETRIEVE_GAME, Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
@@ -231,15 +234,15 @@ public class GameDetailActivity extends Activity {
 
                 //Populate the game min and max players
                 TextView players = (TextView) findViewById(R.id.players);
-                players.setText(game.getMinplayers() + " - " + game.getMaxplayers() + " players");
+                players.setText(game.getMinplayers() + " - " + game.getMaxplayers() + PLAYERS);
 
                 //Populate the game min and max time
                 TextView time = (TextView) findViewById(R.id.time);
-                time.setText(game.getPlaytime() + " players");
+                time.setText(game.getPlaytime() + MINS);
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
-                minAge.setText("Ages: " + game.getAge());
+                minAge.setText(AGES + game.getAge());
                 
                 //Populate the library checkbox		
                 CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);

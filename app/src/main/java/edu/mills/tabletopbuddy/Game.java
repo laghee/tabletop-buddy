@@ -42,7 +42,6 @@ public class Game {
         this.maxplayers = maxplayers;
         this.playtime = playtime;
         this.age = age;
-
     }
 
     /**
