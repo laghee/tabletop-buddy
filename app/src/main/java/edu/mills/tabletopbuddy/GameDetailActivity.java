@@ -240,7 +240,8 @@ public class GameDetailActivity extends Activity {
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
                 minAge.setText("Ages: " + game.getAge());
-
+                
+                //Populate the library checkbox		
                 CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
                 addToLibrary.setChecked(true);
             } else {
