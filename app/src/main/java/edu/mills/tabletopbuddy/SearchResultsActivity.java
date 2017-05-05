@@ -51,8 +51,8 @@ public class SearchResultsActivity extends ListActivity {
         } catch (SearchException e) {
             e.printStackTrace();
         }
-
     }
+
     @Override
     protected void onNewIntent(Intent intent) {
         try {
@@ -83,7 +83,7 @@ public class SearchResultsActivity extends ListActivity {
                 }
             } catch (SearchException e) {
                 e.printStackTrace();
-                Log.d("Caught:", e.getMessage());
+                Log.d("SearchResultsActivity", "Caught:" + e.getMessage());
                 return null;
             }
         }
@@ -159,5 +159,4 @@ public class SearchResultsActivity extends ListActivity {
         }
         return true;
     }
-
 }

@@ -17,15 +17,11 @@ import android.view.View;
  * launch {@link SearchResultsActivity}, {@link MyLibraryActivity}, and {@link RandomGameActivity}.
  */
 public class MainActivity extends Activity {
-    private static final String searchToast = "This will link to the Search Activity :)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// Kate
-//        makeDummyDatabase();
         setContentView(R.layout.activity_main);
-
     }
 
     /**
@@ -36,7 +32,6 @@ public class MainActivity extends Activity {
     public void onSearch(View view){
         Intent searchIntent = new Intent(this, SearchResultsActivity.class);
         startActivity(searchIntent);
-
     }
 
     /**

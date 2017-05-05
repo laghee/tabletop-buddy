@@ -15,14 +15,20 @@ import android.util.Log;
 import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.*;
 
 /**
- * Allows for methods to query the database for a game, and add or remove a game
- * without directly calling the database.
+ * Allows for methods to query the database for a game, add or remove a game.
  */
 public class LibraryDBUtilities {
 
     private LibraryDBUtilities() {}
 
-    static Game getGame(SQLiteDatabase db, int gameId) {
+    /**
+     * Retrieves game from local database based on the row id.
+     *
+     * @param db the SQLite database
+     * @param gameId the row id
+     * @return game the game
+     */
+    public static Game getGame(SQLiteDatabase db, int gameId) {
         Cursor cursor = db.query(LIBRARY_TABLE,
                 new String[]{IMAGE_COL, NAME_COL, DESC_COL, THEME_COL, BGGID_COL, MINPLAYERS_COL,
                         MAXPLAYERS_COL, PLAYTIME_COL, MINAGE_COL}, "_id = ?",
@@ -39,12 +45,11 @@ public class LibraryDBUtilities {
     }
 
     /**
-     * Checks whether the game is inserted into the database.
+     * Inserts game into the local database.
      *
      * @param db the SQLite database
      * @param game the game
-     * @return true when the game is successfully inserted into the
-     * local database.
+     * @return row id of game
      */
     public static long insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
@@ -57,11 +62,11 @@ public class LibraryDBUtilities {
         gameValues.put(MAXPLAYERS_COL, game.getMaxplayers());
         gameValues.put(PLAYTIME_COL, game.getPlaytime());
         gameValues.put(MINAGE_COL, game.getAge());
-//        gameValues.put("YEAR_PUBLISHED", pubdate);
 
         Log.d("DatabaseUtils", "Successfully wrote" + game.getName() + "to db");
         return db.insert("LIBRARY", null, gameValues);
     }
+
     /**
      * Removes a game from the local database by the id of the row.
      *
@@ -78,7 +83,6 @@ public class LibraryDBUtilities {
      * @param db the local database
      * @param bggId the id from BGG
      */
-
     public static void removeGameByBGGId(SQLiteDatabase db, Integer bggId) {
         db.delete(LIBRARY_TABLE, BGGID_COL + " = ?", new String[] {bggId.toString()});
     }
@@ -100,5 +104,4 @@ public class LibraryDBUtilities {
         }
         return libraryId;
     }
-
 }
