@@ -1,14 +1,11 @@
 package edu.mills.tabletopbuddy;
 
 import android.database.sqlite.SQLiteDatabase;
-import java.util.ArrayList;
 
 /**
  * Game class with fields to be accessed.
  */
 public class Game {
-
-    public static ArrayList<Integer> gamesLibrary = new ArrayList<>();
 
     private String image, name, description, theme, age;
     private int minplayers, maxplayers, bggid, playtime;
@@ -25,8 +22,6 @@ public class Game {
         this.age = age;
         this.bggid = bggid;
         this.playtime = playtime;
-
-        gamesLibrary.add(bggid);
     }
 
     /**
@@ -185,9 +180,9 @@ public class Game {
      * Sets the play time.
      * @param playtime
      */
-   public void setPlaytime(int playtime) {
-       this.playtime = playtime;
-   }
+    public void setPlaytime(int playtime) {
+        this.playtime = playtime;
+    }
 
 
     @Override
