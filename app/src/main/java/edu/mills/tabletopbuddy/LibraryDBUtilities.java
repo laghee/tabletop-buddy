@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.content.ContentValues;
@@ -6,6 +13,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.*;
 
+/**
+ * Allows for methods to query the database for a game, and add or remove a game
+ * without directly calling the database.
+ */
 public class LibraryDBUtilities {
 
     private LibraryDBUtilities() {}
@@ -25,6 +36,15 @@ public class LibraryDBUtilities {
         }
         return game;
     }
+
+    /**
+     * Checks whether the game is inserted into the database.
+     *
+     * @param db the SQLite database
+     * @param game the game
+     * @return true when the game is successfully inserted into the
+     * local database.
+     */
     public static boolean insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
         gameValues.put(IMAGE_COL, game.getImage());
@@ -41,15 +61,31 @@ public class LibraryDBUtilities {
         db.insert(LIBRARY_TABLE, null, gameValues);
         return true;
     }
-
+    /**
+     * Removes a game from the local database.
+     *
+     * @param db the local database
+     * @param libraryId the id in the library
+     */
     public static void removeGameByLibraryId(SQLiteDatabase db, Integer libraryId) {
         db.delete(LIBRARY_TABLE, "_id = ?", new String[] {libraryId.toString()});
-    }
-
+    /**
+     * Removes a game from the local database.
+     *
+     * @param db the local database
+     * @param bggId the id from BGG
+     */
     public static void removeGameByBGGId(SQLiteDatabase db, Integer bggId) {
         db.delete(LIBRARY_TABLE, BGGID_COL + " = ?", new String[] {bggId.toString()});
     }
 
+     /**
+     * Checks for a game in the local database and, if it exists, retrieves its local id number.
+     *
+     * @param db the local database
+     * @param bggId the id from BGG
+     * @return libraryId the library id
+     */
     public static int getLibraryIdIfExists(SQLiteDatabase db, int bggId) {
 
         int libraryId = -1;

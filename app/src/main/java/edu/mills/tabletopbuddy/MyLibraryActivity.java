@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.ListActivity;
@@ -17,9 +24,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
-// Correctly queries games added to MyGameDatabase and populates view
-// of personal library.
-// Users are able to add and delete games from their local library.
+/**
+ * Fetches games added to local database and populates the view of a personal library in
+ * alphabetical order. Users can view the game details after clicking a game title,
+ * linking to {@link GameDetailActivity}, where the user can add to or remove from their
+ * personal library.
+ */
 public class MyLibraryActivity extends ListActivity {
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -111,7 +121,6 @@ public class MyLibraryActivity extends ListActivity {
         inflater.inflate(R.menu.navigation_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
