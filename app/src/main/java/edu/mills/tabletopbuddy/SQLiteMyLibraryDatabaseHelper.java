@@ -20,6 +20,18 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "mylibrarydatabase"; // the name of our database
     private static final int DB_VERSION = 1; // the version of the database
 
+    // package-private table and column names
+    static final String LIBRARY_TABLE = "LIBRARY";
+    static final String IMAGE_COL = "IMAGE";
+    static final String NAME_COL = "NAME";
+    static final String DESC_COL = "DESCRIPTION";
+    static final String THEME_COL = "THEME";
+    static final String BGGID_COL = "BGG_ID";
+    static final String MINPLAYERS_COL = "MIN_PLAYERS";
+    static final String MAXPLAYERS_COL = "MAX_PLAYERS";
+    static final String PLAYTIME_COL = "PLAY_TIME";
+    static final String MINAGE_COL = "MIN_AGE";
+
     SQLiteMyLibraryDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -37,18 +49,18 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             db.execSQL("CREATE TABLE LIBRARY (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "IMAGE TEXT, "
-                    + "NAME TEXT NOT NULL, "
-                    + "DESCRIPTION TEXT,"
-                    + "THEME TEXT, "
+                    + IMAGE_COL + " TEXT, "
+                    + NAME_COL + " TEXT NOT NULL, "
+                    + DESC_COL + " TEXT,"
+                    + THEME_COL + " TEXT, "
 //                    + "YEAR_PUBLISHED TEXT, "
 //                    + "MY_RATING DOUBLE NOT NULL, "
 //                    + "BGG_RATING DOUBLE NOT NULL, "
-                    + "BGG_ID INTEGER NOT NULL, "
-                    + "MIN_PLAYERS INTEGER, "
-                    + "MAX_PLAYERS INTEGER, "
-                    + "PLAY_TIME INTEGER, "
-                    + "MIN_AGE TEXT);");
+                    + BGGID_COL + " INTEGER NOT NULL, "
+                    + MINPLAYERS_COL + " INTEGER, "
+                    + MAXPLAYERS_COL + " INTEGER, "
+                    + PLAYTIME_COL + "  INTEGER, "
+                    + MINAGE_COL + " TEXT);");
         }
     }
 
@@ -56,21 +68,21 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
                                    String theme, Integer bggid, String minplayers,
                                    String maxplayers, String playtime, String age) {
         ContentValues gameValues = new ContentValues();
-        gameValues.put("IMAGE", image);
-        gameValues.put("NAME", name);
-        gameValues.put("DESCRIPTION", description);
-        gameValues.put("THEME", theme);
+        gameValues.put(IMAGE_COL, image);
+        gameValues.put(NAME_COL, name);
+        gameValues.put(DESC_COL, description);
+        gameValues.put(THEME_COL, theme);
 //         gameValues.put("YEAR_PUBLISHED", pubdate);
-        gameValues.put("BGG_ID", bggid);
-        gameValues.put("MIN_PLAYERS", minplayers);
-        gameValues.put("MAX_PLAYERS", maxplayers);
-        gameValues.put("PLAY_TIME", playtime);
-        gameValues.put("MIN_AGE", age);
-        db.insert("LIBRARY", null, gameValues);
+        gameValues.put(BGGID_COL, bggid);
+        gameValues.put(MINPLAYERS_COL, minplayers);
+        gameValues.put(MAXPLAYERS_COL, maxplayers);
+        gameValues.put(PLAYTIME_COL, playtime);
+        gameValues.put(MINAGE_COL, age);
+        db.insert(LIBRARY_TABLE, null, gameValues);
     }
 
     private static void deleteGame(SQLiteDatabase db, String bggid) {
-        db.delete("LIBRARY", "ID = ?", new String[] {bggid.toString()});
+        db.delete(LIBRARY_TABLE, "ID = ?", new String[] {bggid.toString()});
     }
 
 }

@@ -19,6 +19,8 @@ public class Game {
     private int minplayers, maxplayers, bggid, playtime;
     private SQLiteDatabase db;
 
+    public Game(String image, String name, String description, String theme, int bggid,
+                int minplayers, int maxplayers, int playtime, String age) {
     /**
      * Constructs a board game.
      *
@@ -203,9 +205,9 @@ public class Game {
      * Sets the play time.
      * @param playtime the playtime
      */
-   public void setPlaytime(int playtime) {
-       this.playtime = playtime;
-   }
+    public void setPlaytime(int playtime) {
+        this.playtime = playtime;
+    }
 
 
     @Override

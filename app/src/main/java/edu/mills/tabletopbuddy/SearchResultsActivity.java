@@ -40,6 +40,8 @@ import edu.mills.tabletopbuddy.bggclient.search.domain.SearchOutput;
  */
 public class SearchResultsActivity extends ListActivity {
     private List<SearchItem> results;
+    private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
+    private static final String NO_RESULTS_FOUND = "No results found.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +63,7 @@ public class SearchResultsActivity extends ListActivity {
     }
 
     private void handleIntent(Intent intent) throws SearchException {
-
-        // handles a click on a search suggestion; launches activity to show word
-        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            Intent wordIntent = new Intent(this, GameDetailActivity.class);
-            wordIntent.setData(intent.getData());
-            startActivity(wordIntent);
-        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             new SearchBGGTask().execute(query);
         }
@@ -81,7 +77,6 @@ public class SearchResultsActivity extends ListActivity {
                 SearchOutput items = BGG.search(query, ThingType.BOARDGAME);
                 if (items != null) {
                     results = items.getItems();
-                    Log.d("Results: ", results.toString());
                     return results;
                 } else {
                     return null;
@@ -110,7 +105,7 @@ public class SearchResultsActivity extends ListActivity {
                     resultIds.add(item.getId());
                 }
             } else {
-                Toast toast = Toast.makeText(SearchResultsActivity.this, "No results found", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SearchResultsActivity.this, NO_RESULTS_FOUND, Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
@@ -118,15 +113,12 @@ public class SearchResultsActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-//        String item = (String) getListAdapter().getItem(position);
-//        Toast.makeText(this, item + " selected", Toast.LENGTH_SHORT).show();
-
         SearchItem searchItem = results.get(position);
         int clickedId = searchItem.getId();
 
         Intent intent = new Intent(SearchResultsActivity.this, GameDetailActivity.class);
         intent.putExtra(GameDetailActivity.EXTRA_GAMENO, clickedId);
-        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, "SearchResultsActivity");
+        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, SEARCH_ACTIVITY);
         startActivity(intent);
     }
 
