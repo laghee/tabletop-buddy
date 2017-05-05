@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="babyBlue"> #ccdfff</color>
+    <color name="circleLimeGreen">#9FE554</color>
+    <color name="buttonPurple">#ddb5ff</color>
+    <color name="buttonBorderPurple">#9900cc</color>
+    <color name="randomGrey">#cbd1d6</color>
+    <color name="randomBorderGrey">#7c8084</color>
+    <color name ="white">#FFFFFF</color>
 </resources>
