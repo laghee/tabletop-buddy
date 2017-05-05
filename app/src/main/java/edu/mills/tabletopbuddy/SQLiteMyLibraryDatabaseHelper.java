@@ -7,7 +7,6 @@
  */
 package edu.mills.tabletopbuddy;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -63,26 +62,4 @@ public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
                     + MINAGE_COL + " TEXT);");
         }
     }
-
-    private static void insertGame(SQLiteDatabase db, String image, String name, String description,
-                                   String theme, Integer bggid, String minplayers,
-                                   String maxplayers, String playtime, String age) {
-        ContentValues gameValues = new ContentValues();
-        gameValues.put(IMAGE_COL, image);
-        gameValues.put(NAME_COL, name);
-        gameValues.put(DESC_COL, description);
-        gameValues.put(THEME_COL, theme);
-//         gameValues.put("YEAR_PUBLISHED", pubdate);
-        gameValues.put(BGGID_COL, bggid);
-        gameValues.put(MINPLAYERS_COL, minplayers);
-        gameValues.put(MAXPLAYERS_COL, maxplayers);
-        gameValues.put(PLAYTIME_COL, playtime);
-        gameValues.put(MINAGE_COL, age);
-        db.insert(LIBRARY_TABLE, null, gameValues);
-    }
-
-    private static void deleteGame(SQLiteDatabase db, String bggid) {
-        db.delete(LIBRARY_TABLE, "ID = ?", new String[] {bggid.toString()});
-    }
-
 }

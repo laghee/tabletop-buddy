@@ -24,7 +24,7 @@ public class LibraryDBUtilities {
     static Game getGame(SQLiteDatabase db, int gameId) {
         Cursor cursor = db.query(LIBRARY_TABLE,
                 new String[]{IMAGE_COL, NAME_COL, DESC_COL, THEME_COL, BGGID_COL, MINPLAYERS_COL,
-                        MAXPLAYERS_COL, PLAYTIME_COL, MINPLAYERS_COL}, "_id = ?",
+                        MAXPLAYERS_COL, PLAYTIME_COL, MINAGE_COL}, "_id = ?",
                 new String[]{Integer.toString(gameId)},
                 null, null, null);
 
@@ -68,7 +68,9 @@ public class LibraryDBUtilities {
      * @param libraryId the id in the library
      */
     public static void removeGameByLibraryId(SQLiteDatabase db, Integer libraryId) {
-        db.delete(LIBRARY_TABLE, "_id = ?", new String[] {libraryId.toString()});
+        db.delete(LIBRARY_TABLE, "_id = ?", new String[]{libraryId.toString()});
+    }
+    
     /**
      * Removes a game from the local database.
      *
