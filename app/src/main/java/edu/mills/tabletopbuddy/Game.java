@@ -8,7 +8,6 @@
 package edu.mills.tabletopbuddy;
 
 import android.database.sqlite.SQLiteDatabase;
-import java.util.ArrayList;
 
 /**
  * Gets and sets the board game properties to be called by in {@link LibraryDBUtilities}.
