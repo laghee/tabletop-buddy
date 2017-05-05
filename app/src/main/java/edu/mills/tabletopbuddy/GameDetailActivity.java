@@ -1,10 +1,15 @@
-
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -36,20 +41,29 @@ import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
 import static android.text.TextUtils.join;
 import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 
+/**
+ * The game's details are displayed, enabling a user to view it's properties.
+ * A user can add to or remove a game from their local library. If a user removes a game,
+ * they are taken back to their library and {@link MyLibraryActivity is launched}.
+ */
 public class GameDetailActivity extends Activity {
     public static final String EXTRA_GAMENO = "gameNo";
     public static final String EXTRA_CLASSNAME = "class";
-    private Cursor cursor;
+    private boolean bgg = true;
     private SQLiteDatabase db;
     private String gameImageUrl;
     private String gameName;
     private String gameDescription;
     private String gameThemes;
-    private String gamePubYr;
+    //    private String gamePubYr;
     private String playerNum;
     private String timeNum;
     private String ageNum;
+
     private final String HTTPS = "https:";
+    private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
+    private static final String LIBRARY_ACTIVITY = "MyLibraryActivity";
+    private static final String RANDOM_ACTIVITY = "RandomGameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +74,52 @@ public class GameDetailActivity extends Activity {
         int gameNo = (Integer) getIntent().getExtras().get(EXTRA_GAMENO);
         String className = (String) getIntent().getExtras().get(EXTRA_CLASSNAME);
 
-        if (className.equals("MyLibraryActivity")) {
-            new LibraryGameDetailTask().execute(gameNo);
-        } else if (className.equals("SearchResultsActivity")) {
-            new FetchBGGTask().execute(gameNo);
-        } else if (className.equals("RandomGameActivity")) {
-            new LibraryGameDetailTask().execute(gameNo);
-        } else {
-            Toast toast = Toast.makeText(this, "Something broke -- no class", Toast.LENGTH_SHORT);
-            toast.show();
+        switch (className) {
+            case LIBRARY_ACTIVITY:
+                bgg = false;
+                new LibraryGameDetailTask().execute(gameNo);
+                break;
+            case SEARCH_ACTIVITY:
+                Log.d("GameDetail", "Switch case SearchResults to Library " + gameNo);
+                new CheckLibraryForGameTask().execute(gameNo);
+                break;
+            case RANDOM_ACTIVITY:
+                bgg = false;
+                new LibraryGameDetailTask().execute(gameNo);
+                break;
+            default:
+                Log.d("Error:", "Class not found.");
+
+        }
+    }
+
+    private class CheckLibraryForGameTask extends AsyncTask<Integer, Void, Integer[]> {
+        @Override
+        protected Integer[] doInBackground(Integer... params) {
+            int gameId = params[0];
+            Integer[] gameInfo = {0, gameId};
+            try {
+                SQLiteOpenHelper libraryDatabaseHelper =
+                        new SQLiteMyLibraryDatabaseHelper(GameDetailActivity.this);
+                db = libraryDatabaseHelper.getReadableDatabase();
+                Integer libraryId = getLibraryIdIfExists(db, gameId);
+                if (libraryId > 0) {
+                    gameInfo[0] = libraryId;
+                    return gameInfo;
+                }
+            } catch (SQLiteException e) {
+                Log.d("LibraryGameDetail: ", "Caught SQLite Exception" + e.getMessage());
+            }
+            return gameInfo;
+        }
+
+        @Override
+        protected void onPostExecute(Integer[] gameInfo) {
+            if (gameInfo[0] > 0) {
+                new LibraryGameDetailTask().execute(gameInfo[0]);
+            } else {
+                new FetchBGGTask().execute(gameInfo[1]);
+            }
         }
     }
 
@@ -77,9 +128,9 @@ public class GameDetailActivity extends Activity {
         protected FetchItem doInBackground(Integer... params) {
             int gameId = params[0];
             try {
-                FetchItem fetchedItem = BGG.fetch(Arrays.asList(gameId), ThingType.BOARDGAME, ThingType.BOARDGAME_EXPANSION).iterator().next();
+                FetchItem fetchedItem = BGG.fetch(Arrays.asList(gameId), ThingType.BOARDGAME,
+                        ThingType.BOARDGAME_EXPANSION).iterator().next();
                 return fetchedItem;
-
             } catch (FetchException e) {
                 Log.d("BGGdetail", "Fetch Exception: " + e.getMessage());
                 return null;
@@ -92,17 +143,12 @@ public class GameDetailActivity extends Activity {
             if (fetchedItem != null) {
                 //Populate the game image
                 ImageView photo = (ImageView) findViewById(R.id.photo);
-                Log.d("Image: ", fetchedItem.getImageUrl());
                 gameImageUrl = HTTPS + fetchedItem.getImageUrl();
-//            gameImageUrl = gameImageUrl.substring(0, gameImageUrl.length() - 4);
-//            gameImageUrl = gameImageUrl.concat("_md.jpg");
-                Log.d("Image: ", gameImageUrl);
                 Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
 
                 //Populate the game name
                 TextView name = (TextView) findViewById(R.id.game_name);
                 gameName = fetchedItem.getName();
-                Log.d("GameDetail", "BGG detail, name: " + gameName);
                 name.setText(gameName);
 
                 //Populate the game description
@@ -115,7 +161,6 @@ public class GameDetailActivity extends Activity {
                 TextView theme = (TextView) findViewById(R.id.theme);
                 List<String> themeList = fetchedItem.getCategories();
                 gameThemes = join(", ", themeList);
-                Log.d("GameDetail", "BGG detail, themes: " + gameThemes);
                 theme.setText(gameThemes);
 
                 //Populate the game pub year
@@ -127,19 +172,16 @@ public class GameDetailActivity extends Activity {
                 TextView players = (TextView) findViewById(R.id.players);
                 playerNum = fetchedItem.getMinPlayers().getValue() + " - " +
                         fetchedItem.getMaxPlayers().getValue() + " players";
-                Log.d("GameDetail", "BGG detail, players: " + playerNum);
                 players.setText(playerNum);
 
                 //Populate the game min and max time
                 TextView time = (TextView) findViewById(R.id.time);
                 timeNum = fetchedItem.getPlayingTime().getValue() + " mins";
-                Log.d("GameDetail", "BGG detail, time: " + timeNum);
                 time.setText(timeNum);
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
-                ageNum = "ages: " + fetchedItem.getMinAge().getValue() + "+";
-                Log.d("GameDetail", "BGG detail, ages: " + ageNum);
+                ageNum = "Ages: " + fetchedItem.getMinAge().getValue();
                 minAge.setText(ageNum);
             } else {
                 Toast toast = Toast.makeText(GameDetailActivity.this,
@@ -154,7 +196,7 @@ public class GameDetailActivity extends Activity {
         @Override
         protected Game doInBackground(Integer... params) {
             int gameId = params[0];
-            Log.d("GAME_NO:", Integer.toString(gameId));
+            Log.d("gameId:", Integer.toString(gameId));
 
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
@@ -162,7 +204,6 @@ public class GameDetailActivity extends Activity {
                 db = libraryDatabaseHelper.getReadableDatabase();
                 Game game = getGame(db, gameId);
                 return game;
-
             } catch (SQLiteException e) {
                 Log.d("LibraryGameDetail: ", "Caught SQLite Exception" + e.getMessage());
                 return null;
@@ -174,12 +215,10 @@ public class GameDetailActivity extends Activity {
             if (game != null) {
                 //Populate the game image
                 ImageView photo = (ImageView) findViewById(R.id.photo);
-                Log.d("GameDetail", "Library detail, Image: " + game.getImage());
                 Picasso.with(GameDetailActivity.this).load(game.getImage()).into(photo);
 
                 //Populate the game name
                 TextView name = (TextView) findViewById(R.id.game_name);
-                Log.d("GameDetail", "Library detail, Name: " + game.getName());
                 name.setText(game.getName());
 
                 //Populate the game description
@@ -188,29 +227,21 @@ public class GameDetailActivity extends Activity {
 
                 //Populate the game themes
                 TextView theme = (TextView) findViewById(R.id.theme);
-                Log.d("GameDetail", "Library detail, Themes: " + game.getTheme());
-                theme.setText("Categories: " + game.getTheme());
+                theme.setText(game.getTheme());
 
                 //Populate the game min and max players
                 TextView players = (TextView) findViewById(R.id.players);
-                Log.d("GameDetail", "Library detail, Players: " + game.getMinplayers() + " - " + game.getMaxplayers());
                 players.setText(game.getMinplayers() + " - " + game.getMaxplayers() + " players");
 
                 //Populate the game min and max time
                 TextView time = (TextView) findViewById(R.id.time);
-                Log.d("GameDetail", "Library detail, Time: " + game.getPlaytime());
-                time.setText("Mins: " + game.getPlaytime());
+                time.setText(game.getPlaytime() + " players");
 
                 //Populate the game min age
                 TextView minAge = (TextView) findViewById(R.id.ages);
-                Log.d("GameDetail", "Library detail, Ages: " + game.getAge());
-                minAge.setText("Ages: " + game.getAge().toString() + "+");
-
-                //Populate the game pub year
-//                TextView year = (TextView)findViewById(R.id.year);
-//                year.setText(gamePubYr);
-
-                //Populate the favorite checkbox
+                minAge.setText("Ages: " + game.getAge());
+                
+                //Populate the library checkbox		
                 CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
                 addToLibrary.setChecked(true);
             } else {
@@ -236,8 +267,8 @@ public class GameDetailActivity extends Activity {
             int maxPlayers = Integer.valueOf(maxplayers.substring(0, maxplayers.length() - 8));
             int time = Integer.valueOf(timeNum.substring(0, timeNum.length() - 5));
 
-            Game game = new Game(gameImageUrl, gameName, gameDescription, gameThemes, ageNum,
-                    minPlayers, maxPlayers, time, gameNo);
+            Game game = new Game(gameImageUrl, gameName, gameDescription, gameThemes, gameNo,
+                    minPlayers, maxPlayers, time, ageNum);
             new AddGameToLibraryTask().execute(game);
         } else {
             ContentValues gameNum = new ContentValues();
@@ -288,7 +319,11 @@ public class GameDetailActivity extends Activity {
             SQLiteOpenHelper myLibraryDatabaseHelper = new SQLiteMyLibraryDatabaseHelper(GameDetailActivity.this);
             try {
                 db = myLibraryDatabaseHelper.getWritableDatabase();
-                removeGame(db, gameId);
+                if (bgg) {
+                    removeGameByBGGId(db, gameId);
+                } else {
+                    removeGameByLibraryId(db, gameId);
+                }
                 db.close();
                 Log.d("GameDetailActivity", "Successfully removed game from db");
                 return gameId;
@@ -305,9 +340,14 @@ public class GameDetailActivity extends Activity {
                         "Database unavailable", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
+                Toast toast = Toast.makeText(GameDetailActivity.this,
+                        "Game removed.", Toast.LENGTH_SHORT);
+                toast.show();
                 Intent intent = new Intent(GameDetailActivity.this, MyLibraryActivity.class);
                 intent.putExtra(GameDetailActivity.EXTRA_GAMENO, libraryId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         }
     }
@@ -315,15 +355,18 @@ public class GameDetailActivity extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (cursor != null) {
-            cursor.close();
+        if (db != null) {
             db.close();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onPause() {
+        super.onPause();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.navigation_menu, menu);
         return true;
@@ -332,7 +375,6 @@ public class GameDetailActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.to_search:
                 startActivity(new Intent(this, SearchResultsActivity.class));
@@ -349,7 +391,6 @@ public class GameDetailActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
 

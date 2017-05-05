@@ -1,3 +1,10 @@
+/**
+ * Implementation of the Tabletop Buddy application. Created for Mills
+ * CS 115: Mobile Application Development, Spring 2017.
+ *
+ * @author Kristen Cutler, Jennifer Diaz, Arianne Agogino Gieringer,
+ * Kate Manning, Erin Walter
+ */
 package edu.mills.tabletopbuddy;
 
 import android.app.ListActivity;
@@ -26,8 +33,15 @@ import edu.mills.tabletopbuddy.bggclient.search.SearchException;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchItem;
 import edu.mills.tabletopbuddy.bggclient.search.domain.SearchOutput;
 
+/**
+ * Performs a query to the BGG server database by name using BGG client API.
+ * Returns search results in a list, enabling a user to view the game's details
+ * once {@link GameDetailActivity} is launched.
+ */
 public class SearchResultsActivity extends ListActivity {
     private List<SearchItem> results;
+    private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
+    private static final String NO_RESULTS_FOUND = "No results found.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +63,7 @@ public class SearchResultsActivity extends ListActivity {
     }
 
     private void handleIntent(Intent intent) throws SearchException {
-
-        // handles a click on a search suggestion; launches activity to show word
-        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            Intent wordIntent = new Intent(this, GameDetailActivity.class);
-            wordIntent.setData(intent.getData());
-            startActivity(wordIntent);
-        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             new SearchBGGTask().execute(query);
         }
@@ -69,7 +77,6 @@ public class SearchResultsActivity extends ListActivity {
                 SearchOutput items = BGG.search(query, ThingType.BOARDGAME);
                 if (items != null) {
                     results = items.getItems();
-                    Log.d("Results: ", results.toString());
                     return results;
                 } else {
                     return null;
@@ -98,7 +105,7 @@ public class SearchResultsActivity extends ListActivity {
                     resultIds.add(item.getId());
                 }
             } else {
-                Toast toast = Toast.makeText(SearchResultsActivity.this, "No results found", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SearchResultsActivity.this, NO_RESULTS_FOUND, Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
@@ -106,15 +113,12 @@ public class SearchResultsActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-//        String item = (String) getListAdapter().getItem(position);
-//        Toast.makeText(this, item + " selected", Toast.LENGTH_SHORT).show();
-
         SearchItem searchItem = results.get(position);
         int clickedId = searchItem.getId();
 
         Intent intent = new Intent(SearchResultsActivity.this, GameDetailActivity.class);
         intent.putExtra(GameDetailActivity.EXTRA_GAMENO, clickedId);
-        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, "SearchResultsActivity");
+        intent.putExtra(GameDetailActivity.EXTRA_CLASSNAME, SEARCH_ACTIVITY);
         startActivity(intent);
     }
 
