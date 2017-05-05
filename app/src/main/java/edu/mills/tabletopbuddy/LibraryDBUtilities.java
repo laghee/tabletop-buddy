@@ -40,10 +40,7 @@ public class LibraryDBUtilities {
         gameValues.put("PLAY_TIME", game.getPlaytime());
         gameValues.put("MIN_AGE", game.getAge());
 //        gameValues.put("YEAR_PUBLISHED", pubdate);
-
-        //db.insert("LIBRARY", null, gameValues);
         Log.d("DatabaseUtils", "Successfully wrote" + game.getName() + "to db");
-        //long rowId = db.getLong(0);
         return db.insert("LIBRARY", null, gameValues);
     }
 
