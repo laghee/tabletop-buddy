@@ -10,6 +10,7 @@ package edu.mills.tabletopbuddy;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import static edu.mills.tabletopbuddy.SQLiteMyLibraryDatabaseHelper.*;
 
@@ -51,7 +52,7 @@ public class LibraryDBUtilities {
      * @return true when the game is successfully inserted into the
      * local database.
      */
-    public static boolean insertGame(SQLiteDatabase db, Game game) {
+    public static long insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
         gameValues.put(IMAGE_COL, game.getImage());
         gameValues.put(NAME_COL, game.getName());
@@ -63,8 +64,8 @@ public class LibraryDBUtilities {
         gameValues.put(PLAYTIME_COL, game.getPlaytime());
         gameValues.put(MINAGE_COL, game.getAge());
 
-        db.insert(LIBRARY_TABLE, null, gameValues);
-        return true;
+        Log.d("DatabaseUtils", "Successfully wrote" + game.getName() + "to db");
+        return db.insert("LIBRARY", null, gameValues);
     }
 
     /**
@@ -76,7 +77,7 @@ public class LibraryDBUtilities {
     public static void removeGameByLibraryId(SQLiteDatabase db, Integer libraryId) {
         db.delete(LIBRARY_TABLE, "_id = ?", new String[]{libraryId.toString()});
     }
-    
+
     /**
      * Removes a game from the local database.
      *
