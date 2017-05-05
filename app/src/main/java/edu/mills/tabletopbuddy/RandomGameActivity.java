@@ -40,6 +40,8 @@ public class RandomGameActivity extends Activity {
 
     private static final String NO_GAME = "Sorry, no games match your criteria :(";
     private static final String RANDOM_ACTIVITY = "RandomGameActivity";
+    private static final String RAW_QUERY_WHERE = "SELECT _id FROM LIBRARY WHERE MIN_PLAYERS>=? AND MAX_PLAYERS<=?";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class RandomGameActivity extends Activity {
             try {
                 db = SQLiteMyLibraryDatabaseHelper.getReadableDatabase();
 
-                cursor = db.rawQuery("SELECT _id FROM LIBRARY WHERE MIN_PLAYERS>=? AND MAX_PLAYERS<=?", selectArgs);
+                cursor = db.rawQuery(RAW_QUERY_WHERE, selectArgs);
                 return cursor;
             } catch (SQLiteException e) {
                 return null;
