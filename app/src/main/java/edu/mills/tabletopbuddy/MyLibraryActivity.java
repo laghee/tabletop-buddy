@@ -73,6 +73,14 @@ public class MyLibraryActivity extends ListActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (gameCursorAdapter != null) {
+            gameCursorAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         if (gameCursorAdapter != null) {
             gameCursorAdapter.notifyDataSetChanged();

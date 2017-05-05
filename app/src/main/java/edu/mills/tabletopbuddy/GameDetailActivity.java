@@ -49,7 +49,11 @@ public class GameDetailActivity extends Activity {
     private String playerNum;
     private String timeNum;
     private String ageNum;
+
     private final String HTTPS = "https:";
+    private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
+    private static final String LIBRARY_ACTIVITY = "MyLibraryActivity";
+    private static final String RANDOM_ACTIVITY = "RandomGameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +64,14 @@ public class GameDetailActivity extends Activity {
         int gameNo = (Integer) getIntent().getExtras().get(EXTRA_GAMENO);
         String className = (String) getIntent().getExtras().get(EXTRA_CLASSNAME);
 
-        if (className.equals("MyLibraryActivity")) {
+        if (className.equals(LIBRARY_ACTIVITY)) {
             new LibraryGameDetailTask().execute(gameNo);
-        } else if (className.equals("SearchResultsActivity")) {
+        } else if (className.equals(SEARCH_ACTIVITY)) {
             new FetchBGGTask().execute(gameNo);
-        } else if (className.equals("RandomGameActivity")) {
+        } else if (className.equals(RANDOM_ACTIVITY)) {
             new LibraryGameDetailTask().execute(gameNo);
         } else {
-            Toast toast = Toast.makeText(this, "Something broke -- no class", Toast.LENGTH_SHORT);
-            toast.show();
+            Log.d("Error:", "Class not found.");
         }
     }
 
@@ -94,8 +97,6 @@ public class GameDetailActivity extends Activity {
                 ImageView photo = (ImageView) findViewById(R.id.photo);
                 Log.d("Image: ", fetchedItem.getImageUrl());
                 gameImageUrl = HTTPS + fetchedItem.getImageUrl();
-//            gameImageUrl = gameImageUrl.substring(0, gameImageUrl.length() - 4);
-//            gameImageUrl = gameImageUrl.concat("_md.jpg");
                 Log.d("Image: ", gameImageUrl);
                 Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
 
@@ -154,7 +155,7 @@ public class GameDetailActivity extends Activity {
         @Override
         protected Game doInBackground(Integer... params) {
             int gameId = params[0];
-            Log.d("GAME_NO:", Integer.toString(gameId));
+            Log.d("gameId:", Integer.toString(gameId));
 
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
@@ -305,9 +306,14 @@ public class GameDetailActivity extends Activity {
                         "Database unavailable", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
+                Toast toast = Toast.makeText(GameDetailActivity.this,
+                        "Game removed.", Toast.LENGTH_SHORT);
+                toast.show();
                 Intent intent = new Intent(GameDetailActivity.this, MyLibraryActivity.class);
                 intent.putExtra(GameDetailActivity.EXTRA_GAMENO, libraryId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         }
     }
