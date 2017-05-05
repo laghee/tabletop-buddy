@@ -62,7 +62,7 @@ public class LibraryDBUtilities {
         return true;
     }
     /**
-     * Removes a game from the local database.
+     * Removes a game from the local database by the id of the row.
      *
      * @param db the local database
      * @param libraryId the id in the library
@@ -77,6 +77,7 @@ public class LibraryDBUtilities {
      * @param db the local database
      * @param bggId the id from BGG
      */
+
     public static void removeGameByBGGId(SQLiteDatabase db, Integer bggId) {
         db.delete(LIBRARY_TABLE, BGGID_COL + " = ?", new String[] {bggId.toString()});
     }
