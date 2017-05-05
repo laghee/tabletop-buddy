@@ -217,11 +217,6 @@ public class GameDetailActivity extends Activity {
                 Log.d("GameDetail", "Library detail, Ages: " + game.getAge());
                 minAge.setText("Ages: " + game.getAge().toString() + "+");
 
-                //Populate the game pub year
-//                TextView year = (TextView)findViewById(R.id.year);
-//                year.setText(gamePubYr);
-
-                //Populate the favorite checkbox
                 CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
                 addToLibrary.setChecked(true);
             } else {

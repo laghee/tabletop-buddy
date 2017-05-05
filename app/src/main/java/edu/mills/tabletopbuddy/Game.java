@@ -15,17 +15,12 @@ import java.util.ArrayList;
  */
 public class Game {
 
-    /**
-     * Adds a game to a list. Checks for the game in {@link LibraryDBUtilities}.
-     */
-    public static ArrayList<Integer> gamesLibrary = new ArrayList<>();
-
     private String image, name, description, theme, age;
     private int minplayers, maxplayers, bggid, playtime;
     private SQLiteDatabase db;
 
     /**
-     * Constructs a board game and adds the game to a list.
+     * Constructs a board game.
      *
      * @param image the game image
      * @param name the game name
@@ -50,7 +45,6 @@ public class Game {
         this.bggid = bggid;
         this.playtime = playtime;
 
-        gamesLibrary.add(bggid);
     }
 
     /**
