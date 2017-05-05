@@ -32,11 +32,7 @@ import edu.mills.tabletopbuddy.bggclient.fetch.FetchException;
 import edu.mills.tabletopbuddy.bggclient.fetch.domain.FetchItem;
 
 import static android.text.TextUtils.join;
-import static edu.mills.tabletopbuddy.LibraryDBUtilities.getGame;
-import static edu.mills.tabletopbuddy.LibraryDBUtilities.getLibraryIdIfExists;
-import static edu.mills.tabletopbuddy.LibraryDBUtilities.insertGame;
-import static edu.mills.tabletopbuddy.LibraryDBUtilities.removeGameByBGGId;
-import static edu.mills.tabletopbuddy.LibraryDBUtilities.removeGameByLibraryId;
+import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 
 public class GameDetailActivity extends Activity {
     public static final String EXTRA_GAMENO = "gameNo";
@@ -51,7 +47,11 @@ public class GameDetailActivity extends Activity {
     private String playerNum;
     private String timeNum;
     private String ageNum;
+
     private final String HTTPS = "https:";
+    private static final String SEARCH_ACTIVITY = "SearchResultsActivity";
+    private static final String LIBRARY_ACTIVITY = "MyLibraryActivity";
+    private static final String RANDOM_ACTIVITY = "RandomGameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +63,21 @@ public class GameDetailActivity extends Activity {
         String className = (String) getIntent().getExtras().get(EXTRA_CLASSNAME);
 
         switch (className) {
-            case "MyLibraryActivity":
+            case LIBRARY_ACTIVITY:
                 bgg = false;
                 new LibraryGameDetailTask().execute(gameNo);
                 break;
-            case "SearchResultsActivity":
+            case SEARCH_ACTIVITY:
                 Log.d("GameDetail", "Switch case SearchResults to Library " + gameNo);
                 new CheckLibraryForGameTask().execute(gameNo);
                 break;
-            case "RandomGameActivity":
+            case RANDOM_ACTIVITY:
                 bgg = false;
                 new LibraryGameDetailTask().execute(gameNo);
                 break;
             default:
-                Toast toast = Toast.makeText(this, "Something broke -- no class", Toast.LENGTH_SHORT);
-                toast.show();
+                Log.d("Error:", "Class not found.");
+
         }
     }
 
@@ -132,8 +132,6 @@ public class GameDetailActivity extends Activity {
                 //Populate the game image
                 ImageView photo = (ImageView) findViewById(R.id.photo);
                 gameImageUrl = HTTPS + fetchedItem.getImageUrl();
-//            gameImageUrl = gameImageUrl.substring(0, gameImageUrl.length() - 4);
-//            gameImageUrl = gameImageUrl.concat("_md.jpg");
                 Picasso.with(GameDetailActivity.this).load(gameImageUrl).into(photo);
 
                 //Populate the game name
@@ -186,7 +184,7 @@ public class GameDetailActivity extends Activity {
         @Override
         protected Game doInBackground(Integer... params) {
             int gameId = params[0];
-            Log.d("GAME_NO:", Integer.toString(gameId));
+            Log.d("gameId:", Integer.toString(gameId));
 
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
@@ -334,13 +332,17 @@ public class GameDetailActivity extends Activity {
                         "Database unavailable", Toast.LENGTH_SHORT);
                 toast.show();
             } else {
+                Toast toast = Toast.makeText(GameDetailActivity.this,
+                        "Game removed.", Toast.LENGTH_SHORT);
+                toast.show();
                 Intent intent = new Intent(GameDetailActivity.this, MyLibraryActivity.class);
                 intent.putExtra(GameDetailActivity.EXTRA_GAMENO, libraryId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         }
     }
-
 
     @Override
     public void onDestroy() {
