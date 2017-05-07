@@ -53,6 +53,7 @@ public class SearchResultsActivity extends ListActivity {
         }
     }
 
+
     @Override
     protected void onNewIntent(Intent intent) {
         try {

@@ -261,7 +261,13 @@ public class GameDetailActivity extends Activity {
         }
     }
 
-    //Update the database when the checkbox is clicked
+    /**
+     * Allows a game to be added to the local library after checking, which
+     * calls {@link AddGameToLibraryTask}. A game will be removed if it
+     * is subsequently unchecked, calling {@link RemoveGameFromLibraryTask}.
+     *
+     * @param view the view to add to a library
+     */
     public void onAddToLibraryClicked(View view) {
         int gameNo = (Integer) getIntent().getExtras().get(EXTRA_GAMENO);
 

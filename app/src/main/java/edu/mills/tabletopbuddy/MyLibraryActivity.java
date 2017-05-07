@@ -25,7 +25,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 /**
- * Fetches games added to local database and populates the view of a personal library in
+ * Fetches games added to a local database and populates the view of a personal library in
  * alphabetical order. Users can view the game details after clicking a game title,
  * linking to {@link GameDetailActivity}, where the user can add to or remove from their
  * personal library.
