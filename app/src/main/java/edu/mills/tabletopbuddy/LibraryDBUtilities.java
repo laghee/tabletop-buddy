@@ -26,7 +26,7 @@ public class LibraryDBUtilities {
      *
      * @param db the SQLite database
      * @param gameId the row id
-     * @return game the game
+     * @return the game
      */
     public static Game getGame(SQLiteDatabase db, int gameId) {
         Cursor cursor = db.query(LIBRARY_TABLE,
@@ -49,7 +49,7 @@ public class LibraryDBUtilities {
      *
      * @param db the SQLite database
      * @param game the game
-     * @return row id of game
+     * @return the row id of game
      */
     public static long insertGame(SQLiteDatabase db, Game game) {
         ContentValues gameValues = new ContentValues();
@@ -92,7 +92,7 @@ public class LibraryDBUtilities {
      *
      * @param db the local database
      * @param bggId the id from BGG
-     * @return libraryId the library id
+     * @return the library id
      */
     public static int getLibraryIdIfExists(SQLiteDatabase db, int bggId) {
 

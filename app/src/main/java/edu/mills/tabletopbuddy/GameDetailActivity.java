@@ -44,7 +44,7 @@ import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 /**
  * The game's details are displayed, enabling a user to view it's properties.
  * A user can add to or remove a game from their local library. If a user removes a game,
- * they are taken back to their library and {@link MyLibraryActivity is launched}.
+ * they are taken back to their library and {@link MyLibraryActivity} is launched.
  */
 public class GameDetailActivity extends Activity {
     private boolean bgg = true;
@@ -263,7 +263,13 @@ public class GameDetailActivity extends Activity {
         }
     }
 
-    //Update the database when the checkbox is clicked
+    /**
+     * Allows a game to be added to the local library after checking, which
+     * calls {@link AddGameToLibraryTask}. A game will be removed if it
+     * is subsequently unchecked, calling {@link RemoveGameFromLibraryTask}.
+     *
+     * @param view the view to add to a library
+     */
     public void onAddToLibraryClicked(View view) {
         int gameNo = (Integer) getIntent().getExtras().get(EXTRA_GAMENO);
 

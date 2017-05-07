@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * A local SQLite database for inserting into and deleting games from a user's local library.
+ * A local SQLite database for inserting into and deleting games from a local library.
  */
 public class SQLiteMyLibraryDatabaseHelper extends SQLiteOpenHelper {
 

@@ -42,7 +42,6 @@ public class RandomGameActivity extends Activity {
     private static final String RANDOM_ACTIVITY = "RandomGameActivity";
     private static final String RAW_QUERY_WHERE = "SELECT _id FROM LIBRARY WHERE MIN_PLAYERS>=? AND MAX_PLAYERS<=?";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
