@@ -98,7 +98,6 @@ public class GameDetailActivity extends Activity {
                 new LibraryGameDetailTask().execute(gameNo);
                 break;
             case SEARCH_ACTIVITY:
-                Log.d("GameDetail", "Switch case SearchResults to Library " + gameNo);
                 new CheckLibraryForGameTask().execute(gameNo);
                 break;
             case RANDOM_ACTIVITY:
@@ -208,7 +207,6 @@ public class GameDetailActivity extends Activity {
         @Override
         protected Game doInBackground(Integer... params) {
             int gameId = params[0];
-            Log.d("LibraryGameDetail", "gameId:" + Integer.toString(gameId));
 
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
@@ -273,7 +271,6 @@ public class GameDetailActivity extends Activity {
     public void onAddToLibraryClicked(View view) {
         int gameNo = (Integer) getIntent().getExtras().get(EXTRA_GAMENO);
 
-        Log.d("GameDetailActivity", "Add2LibraryClick, gameNo: " + gameNo);
         CheckBox addToLibrary = (CheckBox) findViewById(R.id.addToLibrary);
 
         if (addToLibrary.isChecked()) {
@@ -285,24 +282,23 @@ public class GameDetailActivity extends Activity {
             int maxPlayers = Integer.valueOf(maxplayers.substring(0, maxplayers.length() - 8));
             int time = Integer.valueOf(timeNum.substring(0, timeNum.length() - 5));
 
+            ageNum = ageNum.substring(6, ageNum.length());
+
             Game game = new Game(gameImageUrl, gameName, gameDescription, gameThemes, gameNo,
                     minPlayers, maxPlayers, time, ageNum);
             new AddGameToLibraryTask().execute(game);
         } else {
             ContentValues gameNum = new ContentValues();
             gameNum.put(LIBRARYID, gameNo);
-            Log.d("GameDetailActivity", "Calling RemoveGameAsyncTask to remove gameNUM " + gameNo);
             new RemoveGameFromLibraryTask().execute(gameNum);
         }
     }
-
 
     //Inner class to add the game to MyLibrary
     private class AddGameToLibraryTask extends AsyncTask<Game, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Game... game) {
-            Log.d("GameDetailActivity", "Entering doInBackground");
             Game newGame = game[0];
             try {
                 SQLiteOpenHelper libraryDatabaseHelper =
@@ -310,7 +306,6 @@ public class GameDetailActivity extends Activity {
                 db = libraryDatabaseHelper.getWritableDatabase();
                 insertGame(db, newGame);
                 db.close();
-                Log.d("GameDetailActivity", "Successfully wrote to db");
                 return true;
             } catch (SQLiteException e) {
                 Log.d("GameDetailActivity", "SQLite Exception caught");
@@ -343,7 +338,6 @@ public class GameDetailActivity extends Activity {
                     removeGameByLibraryId(db, gameId);
                 }
                 db.close();
-                Log.d("GameDetailActivity", "Successfully removed game from db");
                 return gameId;
             } catch (SQLiteException e) {
                 Log.d("GameDetailActivity", "SQLite Exception caught while removing game from db");
