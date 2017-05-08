@@ -10,7 +10,7 @@ package edu.mills.tabletopbuddy;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Gets and sets the board game properties to be called by in {@link LibraryDBUtilities}.
+ * Provides a view of a board game in the user's library.
  */
 public class Game {
 
@@ -202,21 +202,6 @@ public class Game {
      */
     public void setPlaytime(int playtime) {
         this.playtime = playtime;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
 }

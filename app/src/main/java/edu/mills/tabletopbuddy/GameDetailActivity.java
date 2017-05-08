@@ -42,9 +42,9 @@ import static android.text.TextUtils.join;
 import static edu.mills.tabletopbuddy.LibraryDBUtilities.*;
 
 /**
- * The game's details are displayed, enabling a user to view it's properties.
- * A user can add to or remove a game from their local library. If a user removes a game,
- * they are taken back to their library and {@link MyLibraryActivity} is launched.
+ * Activity for viewing game details. Provides an interface for adding or removing games
+ * from a local library by clicking a checkbox. If a user removes a game,
+ * {@link MyLibraryActivity} is launched and they are taken back to their library.
  */
 public class GameDetailActivity extends Activity {
     private boolean bgg = true;
@@ -262,9 +262,7 @@ public class GameDetailActivity extends Activity {
     }
 
     /**
-     * Allows a game to be added to the local library after checking, which
-     * calls {@link AddGameToLibraryTask}. A game will be removed if it
-     * is subsequently unchecked, calling {@link RemoveGameFromLibraryTask}.
+     * Adds and removes a game to the local library.
      *
      * @param view the view to add to a library
      */
