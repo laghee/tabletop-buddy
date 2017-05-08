@@ -264,9 +264,7 @@ public class GameDetailActivity extends Activity {
     }
 
     /**
-     * Allows a game to be added to the local library after checking, which
-     * calls {@link AddGameToLibraryTask}. A game will be removed if it
-     * is subsequently unchecked, calling {@link RemoveGameFromLibraryTask}.
+     * Adds and removes a game to the local library.
      *
      * @param view the view to add to a library
      */
