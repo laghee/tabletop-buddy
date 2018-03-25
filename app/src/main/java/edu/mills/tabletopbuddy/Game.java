@@ -10,7 +10,7 @@ package edu.mills.tabletopbuddy;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * Gets and sets the board game properties to be called by in {@link LibraryDBUtilities}.
+ * Provides a view of a board game in the user's library.
  */
 public class Game {
 
@@ -46,7 +46,7 @@ public class Game {
 
     /**
      * Gets the image.
-     * @return image of the game
+     * @return the image
      */
     public String getImage() {
         return image;
@@ -54,7 +54,7 @@ public class Game {
 
     /**
      * Gets the name, otherwise known as title.
-     * @return name the name of the game
+     * @return the name of the game
      */
     public String getName() {
         return name;
@@ -85,16 +85,16 @@ public class Game {
     }
 
     /**
-     * Gets the suggested maximum players.
-     * @return maxplayers the maximum players
+     * Gets the maximum number of players.
+     * @return the maximum number of players
      */
     public int getMaxplayers() {
         return maxplayers;
     }
 
     /**
-     * Gets the suggested minimum players.
-     * @return minplayers the minimum players
+     * Gets the minimum number of players.
+     * @return the minimum number of players
      */
     public int getMinplayers() {
         return minplayers;
@@ -102,15 +102,15 @@ public class Game {
 
     /**
      * Gets the estimated playtime.
-     * @return playtime
+     * @return the playtime
      */
     public int getPlaytime() {
         return playtime;
     }
 
     /**
-     * Gets the suggested minimum age of players.
-     * @return age the minimum age of players
+     * Gets the minimum age of players.
+     * @return the minimum age of players
      */
     public String getAge() {
         return age;
@@ -118,22 +118,22 @@ public class Game {
 
     /**
      * Gets the database.
-     * @return db the game's database
+     * @return the SQLite database
      */
     public SQLiteDatabase getDb() {
         return db;
     }
 
     /**
-     * Sets the age.
-     * @param age the age of a game's players
+     * Sets the minimum age of players.
+     * @param age the minimum age of players
      */
     public void setAge(String age) {
         this.age = age;
     }
 
     /**
-     * Sets the name.
+     * Sets the name, otherwise known as title.
      * @param name the name of the game
      */
     public void setName(String name) {
@@ -181,16 +181,16 @@ public class Game {
     }
 
     /**
-     * Sets the min players.
-     * @param minplayers the minimum players
+     * Sets the minimum number of players.
+     * @param minplayers the minimum number of players
      */
     public void setMinplayers(int minplayers) {
         this.minplayers = minplayers;
     }
 
     /**
-     * Sets the max players.
-     * @param maxplayers the maximum players
+     * Sets the maximum number of players.
+     * @param maxplayers the maximum number of players
      */
     public void setMaxplayers(int maxplayers) {
         this.maxplayers = maxplayers;
@@ -202,21 +202,6 @@ public class Game {
      */
     public void setPlaytime(int playtime) {
         this.playtime = playtime;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
 }
